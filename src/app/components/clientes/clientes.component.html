@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <app-navbar></app-navbar>
+  <div class="container">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-auto"></div>
+      <div class="col-4">
+        <button class="btn btn-primary">Crear Cliente</button>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-Info table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>xxxxxxx</td>
+            <td>xxxxxxxx</td>
+            <td>xxxxxxxx</td>
+            <td>xxxxxxx</td>
+            <td>
+              <button class="btn btn-success" (click)="orientacion(1)">Orientacion</button>
+              <button class="btn btn-secondary">Contrato</button>
+              <button class="btn btn-secondary">Poder</button>
+              <button class="btn btn-secondary">Recibo</button>
+              <button class="btn btn-light">Paz Y Salvo</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
