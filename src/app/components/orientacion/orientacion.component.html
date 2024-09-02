@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row align-items-center mt-5">
-    <div class="col-3"></div>
+    <div class="col"></div>
     <div class="col-auto">
       <h2><strong>ORIENTACIÓN INSOLVENCIA ECONÓMICA DE PERSONA NATURAL NO COMERCIANTE</strong></h2>
     </div>
-    <div class="col-3"></div>
+    <div class="col"></div>
   </div>
   <div class="g-3 align-items-center mt-5 formulario">
     <form action="orientacion">
@@ -12,11 +12,11 @@
         <hr>
       </div>
       <div class="row">
-        <div class="col-4"></div>
+        <div class="col"></div>
         <div class="col-auto">
           <h3><strong>DATOS CLIENTE</strong></h3>
         </div>
-        <div class="col-4"></div>
+        <div class="col"></div>
       </div>
       <div class="row m-1">
         <div class="col-4">
@@ -43,11 +43,11 @@
         <hr>
       </div>
       <div class="row ">
-        <div class="col-3"></div>
+        <div class="col"></div>
         <div class="col-auto ">
           <h3><strong>CAUSAS DE LA INSOLVENCIA</strong></h3>
         </div>
-        <div class="col-3"></div>
+        <div class="col"></div>
       </div>
 
       <div class="row m-2">
@@ -110,21 +110,21 @@
         <hr>
       </div>
       <div class="row ">
-        <div class="col-4"></div>
-        <div class="col-auto ">
+        <div class="col"></div>
+        <div class="col-auto">
           <h3><strong>ACREEDORES</strong></h3>
         </div>
-        <div class="col-4"></div>
+        <div class="col"></div>
       </div>
       <div class="row m-2">
-        <div class="col-4"></div>
+        <div class="col"></div>
         <div class="col-auto">
           <button class="btn btn-primary">Agregar producto</button>
         </div>
-        <div class="col-4"></div>
+        <div class="col"></div>
       </div>
       <div class="row m-2">
-        <div class="col-1"></div>
+        <div class="col"></div>
         <div class="col-auto">
           <table class="table table-striped table-hover">
             <thead>
@@ -151,7 +151,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-1"></div>
+        <div class="col"></div>
       </div>
       <div class="row">
         <hr>
@@ -267,13 +267,211 @@
         <hr>
       </div>
       <div class="row m-2">
-        <div class="col-4"></div>
+        <div class="col"></div>
         <div class="col-auto ">
           <h3><strong>RELACIÓN DE BIENES  </strong></h3>
         </div>
-        <div class="col-4"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto ">
+          <h4><strong>BIENES MUEBLES</strong></h4>
+          <h5>Vehículos, Enceres, Electrodomésticos, ETC.</h5>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Tipo de Bien</th>
+                <th scope="col">Valor del Bien</th>
+                <th scope="col">Tipo de Afectacion (prenda)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input class="form-control"  type="text" name="marca" id="marca" placeholder="Marca">
+                  <input class="form-control"  type="text" name="placa" id="placa" placeholder="Placa">
+                  <input class="form-control"  type="text" name="linea" id="linea" placeholder="Linea">
+                </td>
+                <td>
+                  <input class="form-control"  type="number" name="valor" id="valor" placeholder="0">
+                </td>
+                <td>
+                  <textarea class="form-control" name="afectacion" id="afectacion" placeholder="Afectacion"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Total: </strong>
+                </td>
+                <td>
+                  <input class="form-control"  type="number" name="total" id="total" placeholder="0" readonly>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto ">
+          <h4><strong>BIENES INMUEBLES</strong></h4>
+          <h5>Casas, apartamentos, fincas, lotes, bodegas, derechos de Fidi, otros</h5>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Tipo de Bien</th>
+                <th scope="col">Valor del Bien</th>
+                <th scope="col">Tipo de Afectacion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <select class="form-control" name="tipo" id="tipo">
+                    <option value="">Ninguno</option>
+                    <option value="casa">Casa</option>
+                    <option value="lote">Lote</option>
+                    <option value="apartamento">Apartamento</option>
+                  </select>
+                  <input class="form-control"  type="text" name="direccion" id="direccion" placeholder="Direccion">
+                  <input class="form-control"  type="text" name="matricula" id="matricula" placeholder="Matricula Inmobiliaria">
+                </td>
+                <td>
+                  <input class="form-control"  type="number" name="valor" id="valor" placeholder="0">
+                </td>
+                <td>
+                  <select class="form-control" name="tipo" id="tipo">
+                    <option value="">Ninguno</option>
+                    <option value="hipoteca">Hipoteca</option>
+                    <option value="patrimonio">Patrimonio Familiar</option>
+                    <option value="afectacion">Afectacion a la vivienda</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Total: </strong>
+                </td>
+                <td>
+                  <input class="form-control"  type="number" name="total" id="total" placeholder="0" readonly>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto ">
+          <h3><strong>INFORMACION JUDICIAL</strong></h3>
+          <h5>Procesos en contra (ejecutivos y coactivos)</h5>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col">
+          <div class="mb-3">
+            <label for="juzgado" class="form-label">Juzgado</label>
+            <input type="text" class="form-control" id="juzgado">
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="radicado" class="form-label">Radicado</label>
+            <input type="text" class="form-control" id="radicado">
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="demandante" class="form-label">Demandante</label>
+            <input type="text" class="form-control" id="demandante" >
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="proceso" class="form-label">Tipo de Proceso</label>
+            <input type="text" class="form-control" id="proceso" >
+          </div>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto ">
+          <h3><strong>PROPUESTA DE PAGO</strong></h3>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col">
+          <div class="mb-3">
+            <label for="valorcuota" class="form-label">Valor Cuota Mensual</label>
+            <input type="text" class="form-control" id="valorcuota" readonly >
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label for="tiempo" class="form-label">Tiempo</label>
+            <input type="text" class="form-control" id="tiempo" readonly >
+          </div>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto ">
+          <h3><strong>EFECTOS DE LA NEGOCIACIÓN DE DEUDAS</strong></h3>
+
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+          <p>
+            1. Suspensión de procesos <br>
+            2. Suspensión de libranzas <br>
+            3. No embargos <br>
+            4. No procesos judiciales <br>
+            5. No suspensión de servicios públicos domiciliarios <br>
+            6. Protección del patrimonio <br>
+            7. Fórmulas de pago que pueden incluir: condonación de intereses, pagos a capital, periodos
+            de gracia.
+          </p>
+          <p>
+            ANEXOS NECESARIOS: deberá anexar copia de su documento de identidad, certificado de ingresos,
+            certificación de existencia y representación legal de los acreedores en caso de ser entidades expedida por la
+            correspondiente cámara de comercio.
+          </p>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+
+            <button class="btn btn-info m-1" (click)="volver()" >volver</button>
+
+
+            <button class="btn btn-success m-1" (click)="generar()" >Guardar</button>
+
+        </div>
+        <div class="col"></div>
       </div>
     </form>
   </div>
-  <button class="btn btn-info" (click)="volver()" >volver</button>
+
 </div>

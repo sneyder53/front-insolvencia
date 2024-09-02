@@ -23,4 +23,8 @@ export class OrientacionComponent implements OnInit {
     this._router.navigate(["/cliente"]);
   }
 
+  generar(){
+    this._router.navigate(["/cliente"]);
+  }
+
 }
