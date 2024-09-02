@@ -12,39 +12,45 @@
         <hr>
       </div>
       <div class="row">
-        <div class="col-3"></div>
+        <div class="col-4"></div>
         <div class="col-auto">
-          <h3>Datos Cliente</h3>
+          <h3><strong>DATOS CLIENTE</strong></h3>
         </div>
-        <div class="col-3"></div>
+        <div class="col-4"></div>
       </div>
-      <div class="row">
+      <div class="row m-1">
         <div class="col-4">
           <div class="mb-3">
             <label for="cliente" class="form-label">Cedula</label>
             <input type="text" class="form-control" id="cedula" placeholder="1212212" disabled>
           </div>
         </div>
-        <div class="col-auto"></div>
+
         <div class="col-4">
           <div class="mb-3">
             <label for="cliente" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="cedula" placeholder="xxxxxxxxxx" disabled>
+            <input type="text" class="form-control" id="nombre" placeholder="xxxxxxxxxx" disabled>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="mb-3">
+            <label for="cliente" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="telefono" placeholder="xxxxxxxxxx" disabled>
           </div>
         </div>
       </div>
       <div class="row">
         <hr>
       </div>
-      <div class="row">
+      <div class="row ">
         <div class="col-3"></div>
-        <div class="col-auto">
+        <div class="col-auto ">
           <h3><strong>CAUSAS DE LA INSOLVENCIA</strong></h3>
         </div>
         <div class="col-3"></div>
       </div>
 
-      <div class="row">
+      <div class="row m-2">
         <div class="col-4">
           <div class="mb-3">
             <div class="form-check">
@@ -103,7 +109,170 @@
       <div class="row">
         <hr>
       </div>
-      
+      <div class="row ">
+        <div class="col-4"></div>
+        <div class="col-auto ">
+          <h3><strong>ACREEDORES</strong></h3>
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col-4"></div>
+        <div class="col-auto">
+          <button class="btn btn-primary">Agregar producto</button>
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col-1"></div>
+        <div class="col-auto">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Acreedor</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Valor Deuda</th>
+                <th scope="col">Dias en mora</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>xx</td>
+                <td>xxxxxxxxxxxxxxxxx</td>
+                <td>xxxxxxxxxxxxxxxxx</td>
+                <td>xxxxxxxxx</td>
+                <td>xxx</td>
+                <td>
+                  <button class="btn btn-danger">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-1"></div>
+      </div>
+      <div class="row">
+        <hr>
+      </div>
+      <div class="row m-2">
+        <div class="col-4"></div>
+        <div class="col-auto ">
+          <h3><strong>GASTOS DE MANUTENCIÓN </strong></h3>
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ÍTEM (Mensual)</th>
+                <th scope="col">VALOR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ENERGÍA</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>AGUA, ALCANTARILLADO Y ASEO</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>GAS</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>TELECOMUNICACIONES (Móvil- Fijo)</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>TELEVISIÓN</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>ARRIENDO</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>ADMINISTRACIÓN</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>SALUD</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>SEGUROS</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>ALIMENTACIÓN</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>EDUCACIÓN</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>TRANSPORTE</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>OTROS GASTOS: Cuales CARRO-TARJETAS</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+              <tr>
+                <td>TOTAL</td>
+                <td>
+                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row">
+        <hr>
+      </div>
+      <div class="row m-2">
+        <div class="col-4"></div>
+        <div class="col-auto ">
+          <h3><strong>RELACIÓN DE BIENES  </strong></h3>
+        </div>
+        <div class="col-4"></div>
+      </div>
     </form>
   </div>
   <button class="btn btn-info" (click)="volver()" >volver</button>
