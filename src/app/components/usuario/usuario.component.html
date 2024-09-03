@@ -5,7 +5,9 @@
       <div class="col-4"></div>
       <div class="col-auto"></div>
       <div class="col-4">
-        <button class="btn btn-primary">Crear Usuario</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearUsuario">
+          Crear Usuario
+        </button>
       </div>
     </div>
     <div class="row">
@@ -26,12 +28,159 @@
             <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
             <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
             <td>
-              <button class="btn btn-warning">Cambiar Contraseña</button>
-              <button class="btn btn-danger">Eliminar</button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#cambiarPassword">
+                Cambiar Contraseña
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarUsuario">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="crearUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="crearUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="crearUsuarioLabel">Crear Usurio</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <form class="was-validated">
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="cedula" class="form-label">Cedula</label>
+                  <input type="number" class="form-control" id="cedula" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="usuario" class="form-label">Nombre Usuario</label>
+                  <input type="text" class="form-control" id="usuario" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombres y Apellidos</label>
+                  <input type="text" class="form-control" id="nombre" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Correo Electronico</label>
+                  <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="confimapassword" class="form-label">Confirmacion Password</label>
+                  <input type="password" class="form-control" id="confimapassword" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="cambiarPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cambiarPasswordLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cambiarPasswordLabel">Cambiar Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <form class="was-validated" >
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="cedula" class="form-label">Cedula</label>
+                  <input type="number" class="form-control" id="cedula" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="actualpassword" class="form-label">Password Actual</label>
+                  <input type="password" class="form-control" id="actualpassword" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="password" class="form-label">Nuevo Password</label>
+                  <input type="password" class="form-control" id="password" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="confimapassword" class="form-label">Confirmacion Password</label>
+                  <input type="password" class="form-control" id="confimapassword" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="eliminarUsuario" tabindex="-1" aria-labelledby="eliminarUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="eliminarUsuarioLabel">Eliminar Usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿ Estas seguro que deseas Eliminar este Usuario ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger">Si</button>
+      </div>
     </div>
   </div>
 </div>
