@@ -5,7 +5,9 @@
       <div class="col-4"></div>
       <div class="col-auto"></div>
       <div class="col-4">
-        <button class="btn btn-primary">Crear Causa</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearCausa">
+          Crear Causa
+        </button>
       </div>
     </div>
     <div class="row">
@@ -24,12 +26,112 @@
             <td>xxxxxxx</td>
             <td>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
             <td>
-              <button class="btn btn-warning">Actualizar</button>
-              <button class="btn btn-danger">Eliminar</button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#actualizarCausa">
+                Actualizar
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarCausa">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="crearCausa" tabindex="-1" aria-labelledby="crearCausaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="crearCausaLabel">Crear Causa</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <form class="was-validated">
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="causa" class="form-label">Nombre Causa</label>
+                  <input type="text" class="form-control" id="causa" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripcion</label>
+                  <textarea class="form-control" name="descripcion" id="descripcion" required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="actualizarCausa" tabindex="-1" aria-labelledby="actualizarCausaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="actualizarCausaLabel">Actualizar Causa</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <form class="was-validated">
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="causa" class="form-label">Nombre Causa</label>
+                  <input type="text" class="form-control" id="causa" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripcion</label>
+                  <textarea class="form-control" name="descripcion" id="descripcion" required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="eliminarCausa" tabindex="-1" aria-labelledby="eliminarCausaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="eliminarCausaLabel">Eliminar Causa</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿ Estas seguro que deseas Eliminar esta Causa ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger">Si</button>
+      </div>
     </div>
   </div>
 </div>

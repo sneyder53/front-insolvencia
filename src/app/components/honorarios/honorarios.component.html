@@ -5,7 +5,9 @@
       <div class="col-4"></div>
       <div class="col-auto"></div>
       <div class="col-4">
-        <button class="btn btn-primary">Crear Honorario</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearHonorario">
+          Crear Honorario
+        </button>
       </div>
     </div>
     <div class="row">
@@ -30,12 +32,146 @@
             <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
             <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
             <td>
-              <button class="btn btn-warning">Actualizar</button>
-              <button class="btn btn-danger">Eliminar</button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#actualizarHonorario">
+                Actualizar
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarHonorario">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="crearHonorario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="crearHonorarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="crearHonorarioLabel">Crear Honorario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <form class="was-validated">
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="valormenor" class="form-label">Menor</label>
+                  <input type="number" class="form-control" id="valormenor" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                  <label for="valormayor" class="form-label">Mayor</label>
+                  <input type="number" class="form-control" id="valormayor" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="honorario" class="form-label">Valor Honorario</label>
+                  <input type="number" class="form-control" id="honorario" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                  <label for="porcentaje" class="form-label">% Honorario</label>
+                  <input type="number" class="form-control" id="porcentaje" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                  <label for="cuota" class="form-label">Cuotas</label>
+                  <input type="number" class="form-control" id="cuota" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="actualizarHonorario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="actualizarHonorarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="actualizarHonorarioLabel">Actualizar Honorario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <form class="was-validated">
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="valormenor" class="form-label">Menor</label>
+                  <input type="number" class="form-control" id="valormenor" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                  <label for="valormayor" class="form-label">Mayor</label>
+                  <input type="number" class="form-control" id="valormayor" required>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label for="honorario" class="form-label">Valor Honorario</label>
+                  <input type="number" class="form-control" id="honorario" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                  <label for="porcentaje" class="form-label">% Honorario</label>
+                  <input type="number" class="form-control" id="porcentaje" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                  <label for="cuota" class="form-label">Cuotas</label>
+                  <input type="number" class="form-control" id="cuota" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="eliminarHonorario" tabindex="-1" aria-labelledby="eliminarHonorarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="eliminarHonorarioLabel">Eliminar Honorario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿ Estas seguro que deseas Eliminar este Honorario ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger">Si</button>
+      </div>
     </div>
   </div>
 </div>
