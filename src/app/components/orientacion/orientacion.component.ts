@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-orientacion',
-  standalone: true,
-  imports: [],
-  templateUrl: './orientacion.component.html',
-  styleUrl: './orientacion.component.css'
+    selector: 'app-orientacion',
+    imports: [],
+    templateUrl: './orientacion.component.html',
+    styleUrl: './orientacion.component.css'
 })
 export class OrientacionComponent implements OnInit {
 

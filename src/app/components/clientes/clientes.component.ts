@@ -3,11 +3,10 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-clientes',
-  standalone: true,
-  imports: [NavbarComponent],
-  templateUrl: './clientes.component.html',
-  styleUrl: './clientes.component.css'
+    selector: 'app-clientes',
+    imports: [NavbarComponent],
+    templateUrl: './clientes.component.html',
+    styleUrl: './clientes.component.css'
 })
 export class ClientesComponent implements OnInit {
 
