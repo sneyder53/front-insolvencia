@@ -8,12 +8,14 @@ import { OrientacionComponent } from './components/orientacion/orientacion.compo
 import { CausasComponent } from './components/causas/causas.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HonorariosComponent } from './components/honorarios/honorarios.component';
+import { ProductosComponent } from './components/productos/productos.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },
 	{path: 'home', component: HomeComponent },
   {path: 'cliente', component: ClientesComponent},
   {path: 'acreedor', component: AcreedoresComponent},
+  {path:'producto',component: ProductosComponent},
   {path: 'causa', component: CausasComponent},
   {path: 'usuario', component: UsuarioComponent},
   {path: 'honorario', component: HonorariosComponent},

@@ -5,8 +5,8 @@
       <div class="col-4"></div>
       <div class="col-auto"></div>
       <div class="col-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAcreedorModal">
-          Crear Acreedor
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductoModal">
+          Crear Producto
         </button>
       </div>
     </div>
@@ -15,6 +15,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col">Acreedor</th>
             <th scope="col">Nombre</th>
             <th scope="col"></th>
           </tr>
@@ -22,6 +23,7 @@
         <tbody>
           <tr>
             <td>xx</td>
+            <td>xxxxxxx</td>
             <td>xxxxxxx</td>
             <td>
               <button class="btn btn-warning">Actualizar</button>
@@ -34,18 +36,29 @@
   </div>
 </div>
 
-<div class="modal fade" id="createAcreedorModal" tabindex="-1" aria-labelledby="createAcreedorModalLabel" aria-hidden="true">
+<div class="modal fade" id="createProductoModal" tabindex="-1" aria-labelledby="createProductoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="createAcreedorModalLabel">REGISTRAR ACREDOR</h1>
+        <h1 class="modal-title fs-5" id="createProductoModalLabel">REGISTRAR ACREDOR</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="acreedor" class="col-form-label">Acreedor:</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="1">Acreedor 1</option>
+                    <option value="2">Acreedor 2</option>
+                    <option value="3">Acreedor 3</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
                 <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
                   <input type="text" class="form-control" id="nombre">
