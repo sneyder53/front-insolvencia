@@ -3,7 +3,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
     selector: 'app-acreedores',
-    imports: [NavbarComponent],
+    standalone: false,
     templateUrl: './acreedores.component.html',
     styleUrl: './acreedores.component.css'
 })

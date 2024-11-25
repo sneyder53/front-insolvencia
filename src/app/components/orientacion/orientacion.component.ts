@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-orientacion',
-    imports: [],
+    standalone: false,
     templateUrl: './orientacion.component.html',
     styleUrl: './orientacion.component.css'
 })

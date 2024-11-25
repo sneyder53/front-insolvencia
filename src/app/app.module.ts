@@ -4,14 +4,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
+
+import { AcreedoresComponent } from './components/acreedores/acreedores.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { CausasComponent } from './components/causas/causas.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { HomeComponent } from './components/home/home.component';
+import { HonorariosComponent } from './components/honorarios/honorarios.component';
+import { LoginComponent } from './components/login/login.component';
+import { OrientacionComponent } from './components/orientacion/orientacion.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AcreedoresComponent,
+    NavbarComponent,
+    CausasComponent,
+    ClientesComponent,
+    HomeComponent,
+    HonorariosComponent,
+    LoginComponent,
+    OrientacionComponent,
+    ProductosComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterLink
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],

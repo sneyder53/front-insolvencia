@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from "../navbar/navbar.component";
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-clientes',
-    imports: [NavbarComponent],
+    standalone: false,
     templateUrl: './clientes.component.html',
     styleUrl: './clientes.component.css'
 })
