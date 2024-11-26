@@ -26,8 +26,12 @@
             <td>xxxxxxx</td>
             <td>xxxxxxx</td>
             <td>
-              <button class="btn btn-warning">Actualizar</button>
-              <button class="btn btn-danger">Eliminar</button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateProductoModal">
+                Actualizar
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProducto">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
@@ -36,11 +40,11 @@
   </div>
 </div>
 
-<div class="modal fade" id="createProductoModal" tabindex="-1" aria-labelledby="createProductoModalLabel" aria-hidden="true">
+<div class="modal fade" id="createProductoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProductoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="createProductoModalLabel">REGISTRAR ACREDOR</h1>
+        <h1 class="modal-title fs-5" id="createProductoModalLabel">REGISTRAR PRODUCTO</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -71,6 +75,65 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateProductoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateProductoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateProductoModalLabel">ACTUALIZAR PRODUCTO</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="acreedor" class="col-form-label">Acreedor:</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="1">Acreedor 1</option>
+                    <option value="2">Acreedor 2</option>
+                    <option value="3">Acreedor 3</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="nombre" class="col-form-label">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="eliminarProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eliminarProductoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="eliminarProductoLabel">Eliminar Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿ Estas seguro que deseas Eliminar este Producto ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger">Si</button>
       </div>
     </div>
   </div>
