@@ -1,0 +1,29 @@
+import { Token } from './../models/token';
+import { UsuarioLogin } from './../models/usuario-login';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl: string = 'http://localhost:9000/logins/auth';
+  constructor(private _http: HttpClient) {}
+
+  login(userLogin: UsuarioLogin): Observable<Token> {
+    return this._http.post<Token>( this.apiUrl + "/login", userLogin);
+  }
+
+  setToken(token: Token): void {
+    localStorage.setItem('token', JSON.stringify(token));
+  }
+
+  getToken(): Token {
+    return JSON.parse(localStorage.getItem('token')!); // Obtener desde localStorage si es necesario
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+}

@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { OrientacionComponent } from './components/orientacion/orientacion.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -36,6 +37,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     RouterLink
   ],
