@@ -15,18 +15,19 @@
         <thead>
           <tr>
             <th scope="col">#</th>
+            <th scope="col">Username</th>
             <th scope="col">Cedula</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Contraseña</th>
+
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>xx</td>
-            <td>xxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{usuario.id}}</td>
+            <td>{{usuario.username}}</td>
+            <td>{{usuario.cedula}}</td>
+            <td>{{usuario.nombresyapellidos}}</td>
             <td>
               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#cambiarPassword">
                 Cambiar Contraseña

@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = 'http://localhost:9000/logins/auth';
+  private apiUrl: string = 'http://localhost:9002/auth';
   constructor(private _http: HttpClient) {}
 
   login(userLogin: UsuarioLogin): Observable<Token> {
@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   getToken(): Token {
-    return JSON.parse(localStorage.getItem('token')!); // Obtener desde localStorage si es necesario
+    return JSON.parse(localStorage.getItem('token')!)// Obtener desde localStorage si es necesario
   }
 
   logout(): void {
