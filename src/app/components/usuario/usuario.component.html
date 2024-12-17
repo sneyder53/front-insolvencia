@@ -17,9 +17,9 @@
             <th scope="col">#</th>
             <th scope="col">Username</th>
             <th scope="col">Cedula</th>
-            <th scope="col">Nombre</th>
-
-            <th scope="col"></th>
+            <th scope="col">Nombres y Apellidos</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody>
@@ -28,11 +28,13 @@
             <td>{{usuario.username}}</td>
             <td>{{usuario.cedula}}</td>
             <td>{{usuario.nombresyapellidos}}</td>
+            <td *ngIf="usuario.estado" class="text-success"> Activo </td>
+            <td *ngIf="!usuario.estado" class="text-danger"> Inactivo </td>
             <td>
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#cambiarPassword">
+              <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#cambiarPassword" (click)="getUsuario(usuario.id)">
                 Cambiar Contraseña
               </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarUsuario">
+              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#eliminarUsuario">
                 Eliminar
               </button>
             </td>
@@ -53,12 +55,12 @@
       </div>
       <div class="modal-body">
         <div class="container-flud">
-          <form class="was-validated">
+          <form class="was-validated" #formCrearUsuario="ngForm" (ngSubmit)="crearUsuario()">
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
                   <label for="cedula" class="form-label">Cedula</label>
-                  <input type="number" class="form-control" id="cedula" required>
+                  <input type="text" class="form-control" id="cedula" [(ngModel)]="usuario.cedula" name="cedula" pattern="^\d+$" required>
                 </div>
               </div>
             </div>
@@ -66,7 +68,7 @@
               <div class="col">
                 <div class="mb-3">
                   <label for="usuario" class="form-label">Nombre Usuario</label>
-                  <input type="text" class="form-control" id="usuario" required>
+                  <input type="text" class="form-control" id="username" [(ngModel)]="usuario.username" name="username" required>
                 </div>
               </div>
             </div>
@@ -74,7 +76,7 @@
               <div class="col">
                 <div class="mb-3">
                   <label for="nombre" class="form-label">Nombres y Apellidos</label>
-                  <input type="text" class="form-control" id="nombre" required>
+                  <input type="text" class="form-control" id="nombresyapellidos" [(ngModel)]="usuario.nombresyapellidos" name="nombresyapellidos" required>
                 </div>
               </div>
             </div>
@@ -82,7 +84,7 @@
               <div class="col">
                 <div class="mb-3">
                   <label for="email" class="form-label">Correo Electronico</label>
-                  <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                  <input type="email" class="form-control" id="email" [(ngModel)]="usuario.email" name="email" placeholder="name@example.com" required>
                 </div>
               </div>
             </div>
@@ -90,7 +92,7 @@
               <div class="col">
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" required>
+                  <input type="password" class="form-control" id="password" [(ngModel)]="usuario.password" name="password" required>
                 </div>
               </div>
             </div>
@@ -98,13 +100,26 @@
               <div class="col">
                 <div class="mb-3">
                   <label for="confimapassword" class="form-label">Confirmacion Password</label>
-                  <input type="password" class="form-control" id="confimapassword" required>
+                  <input type="password" class="form-control" id="confimapassword" [(ngModel)]="confimapassword" name="confimapassword" required>
+                  <div *ngIf="confimapassword && usuario.password !== confimapassword" class="invalid-feedback">
+                    La contraseña no coincide!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="estado" [(ngModel)]="usuario.estado" name="estado">
+                    <label class="form-check-label" for="estado">Estado</label>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-primary" type="submit" [disabled]="!confirmacionPassword(usuario.password,confimapassword) || formCrearUsuario.invalid" data-bs-dismiss="modal">Guardar</button>
             </div>
           </form>
         </div>
@@ -123,42 +138,42 @@
       </div>
       <div class="modal-body">
         <div class="container-flud">
-          <form class="was-validated" >
+          <form class="was-validated" #fromCambioPassword="ngForm" (ngSubmit)="cambiarPassoword()" >
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
                   <label for="cedula" class="form-label">Cedula</label>
-                  <input type="number" class="form-control" id="cedula" readonly>
+                  <input type="number" class="form-control" id="cedula" [(ngModel)]="usuarioCambioPassword.cedula" name="cedula" readonly>
                 </div>
               </div>
             </div>
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="actualpassword" class="form-label">Password Actual</label>
-                  <input type="password" class="form-control" id="actualpassword" required>
+                  <label for="password" class="form-label">Password Actual</label>
+                  <input type="password" class="form-control" id="password"  [(ngModel)]="usuarioCambioPassword.password" name="password" required>
                 </div>
               </div>
             </div>
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="password" class="form-label">Nuevo Password</label>
-                  <input type="password" class="form-control" id="password" required>
+                  <label for="newPassword" class="form-label">Nuevo Password</label>
+                  <input type="password" class="form-control" id="newPassword" [(ngModel)]="usuarioCambioPassword.newPassword" name="newPassword" required>
                 </div>
               </div>
             </div>
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="confimapassword" class="form-label">Confirmacion Password</label>
-                  <input type="password" class="form-control" id="confimapassword" required>
+                  <label for="confirmPassword" class="form-label">Confirmacion Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="usuarioCambioPassword.confirmPassword" name="confirmPassword" required>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-primary" type="submit" [disabled]="!confirmacionPassword(usuarioCambioPassword.newPassword, usuarioCambioPassword.confirmPassword ) || fromCambioPassword.invalid" data-bs-dismiss="modal">Guardar</button>
             </div>
           </form>
         </div>
@@ -182,6 +197,23 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
         <button type="button" class="btn btn-danger">Si</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <small>Justo ahora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+    <div *ngIf="success" class="toast-body">
+      {{successMessage}}
+    </div>
+    <div *ngIf="error" class="toast-body">
+      {{errorMessage}}
     </div>
   </div>
 </div>

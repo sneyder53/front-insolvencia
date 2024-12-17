@@ -3,6 +3,7 @@ import { UsuarioLogin } from './../models/usuario-login';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  registrarUsuario(usuario:Usuario): Observable<Token> {
+    return this._http.post<Token>(this.apiUrl + "/registrer",usuario)
   }
 }
