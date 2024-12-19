@@ -26,4 +26,9 @@ export class UsuarioService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token.token}`);
     return this._http.post<Token>(this.apiUrl+"/cambio", usuario, {headers});
   }
+
+  cambiarEstado(token:Token, id:number|null):Observable<Token>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token.token}`);
+    return this._http.post<Token>(this.apiUrl+`/${id}`,null, {headers});
+  }
 }

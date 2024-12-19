@@ -17,6 +17,7 @@ import { OrientacionComponent } from './components/orientacion/orientacion.compo
 import { ProductosComponent } from './components/productos/productos.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { FormsModule } from '@angular/forms';
+import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 
@@ -39,9 +40,24 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    RouterLink
+    RouterLink,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useValue: {
+          tokenGetter: () => {
+            return localStorage.getItem('access_token');
+          },
+          allowedDomains: ["example.com"],
+          disallowedRoutes: ["example.com/examplebadroute/"],
+        }
+      }
+    })
   ],
-  providers: [provideHttpClient()],
+  providers: [
+    provideHttpClient(),
+    JwtHelperService
+  ],
   bootstrap: [AppComponent],
   exports:[]
 })

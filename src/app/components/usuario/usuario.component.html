@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-4"></div>
       <div class="col-auto"></div>
@@ -34,8 +34,8 @@
               <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#cambiarPassword" (click)="getUsuario(usuario.id)">
                 Cambiar Contraseña
               </button>
-              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#eliminarUsuario">
-                Eliminar
+              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#cambiarEstado" (click)="getUsuario(usuario.id)">
+                Cambiar Estado
               </button>
             </td>
           </tr>
@@ -183,19 +183,19 @@
 </div>
 
 
-<div class="modal fade" id="eliminarUsuario" tabindex="-1" aria-labelledby="eliminarUsuarioLabel" aria-hidden="true">
+<div class="modal fade" id="cambiarEstado" tabindex="-1" aria-labelledby="cambiarEstadoLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="eliminarUsuarioLabel">Eliminar Usuario</h1>
+        <h1 class="modal-title fs-5" id="cambiarEstadoLabel">Cambiar Estado</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿ Estas seguro que deseas Eliminar este Usuario ?
+        ¿ Estas seguro que deseas Cambiar el estado de este Usuario ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-danger">Si</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cambiarEstado()">Si</button>
       </div>
     </div>
   </div>

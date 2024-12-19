@@ -3,6 +3,7 @@ import { UsuarioLogin } from './../models/usuario-login';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Usuario } from '../models/usuario';
 })
 export class AuthService {
   private apiUrl: string = 'http://localhost:9002/auth';
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   login(userLogin: UsuarioLogin): Observable<Token> {
     return this._http.post<Token>( this.apiUrl + "/login", userLogin);
@@ -30,5 +31,11 @@ export class AuthService {
 
   registrarUsuario(usuario:Usuario): Observable<Token> {
     return this._http.post<Token>(this.apiUrl + "/registrer",usuario)
+  }
+
+  isTokenExpired(): boolean {
+    const token:string = this.getToken().token;
+    return !this.jwtHelper.isTokenExpired(token);
+
   }
 }

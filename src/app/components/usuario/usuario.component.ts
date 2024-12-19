@@ -113,6 +113,38 @@ export class UsuarioComponent implements OnInit {
     );
   }
 
+  cambiarEstado(){
+    const token:Token = this._authService.getToken()
+    console.log("token: " +  token.token)
+    this._userService.cambiarEstado(token,this.usuario1.id).subscribe(
+      response => {
+        console.log(response);
+        this.successMessage = response.message;
+        this.showToast = true;
+        this.success = true;
+        setTimeout(() => {
+          this.showToast = false;
+          this.success = false;
+        }, 3000);
+        this.getAllusuarios()
+        this.usuario1 = new Usuario(null,"","","","","",false,null);
+      },
+      error => {
+        console.log(error);
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.showToast = true;
+        this.error = true;
+        setTimeout(() => {
+          this.showToast = false;
+          this.error = false;
+        }, 3000);
+        this.usuario1 = new Usuario(null,"","","","","",false,null);
+      }
+    );
+
+  }
+
   confirmacionPassword(password:string, confirmpassword:string): boolean {
     return password=== confirmpassword;
   }
