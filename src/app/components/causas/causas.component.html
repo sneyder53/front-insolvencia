@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-4"></div>
       <div class="col-auto"></div>
@@ -16,20 +16,18 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col"></th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>xx</td>
-            <td>xxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+          <tr *ngFor="let causa of causas">
+            <td>{{ causa.id }}</td>
+            <td>{{ causa.nombre }}</td>
             <td>
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#actualizarCausa">
+              <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#actualizarCausa" (click)="causa.id !== null ? getCausa(causa.id) : null">
                 Actualizar
               </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarCausa">
+              <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#eliminarCausa" (click)="causa.id !== null ? getCausa(causa.id) : null">
                 Eliminar
               </button>
             </td>
@@ -50,26 +48,18 @@
       </div>
       <div class="modal-body">
         <div class="container-flud">
-          <form class="was-validated">
+          <form class="was-validated" #formCrearCausa="ngForm" (ngSubmit)="crearCausa()">
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="causa" class="form-label">Nombre Causa</label>
-                  <input type="text" class="form-control" id="causa" required>
-                </div>
-              </div>
-            </div>
-            <div class="row g-3 align-items-center">
-              <div class="col">
-                <div class="mb-3">
-                  <label for="descripcion" class="form-label">Descripcion</label>
-                  <textarea class="form-control" name="descripcion" id="descripcion" required></textarea>
+                  <label for="nombre" class="form-label">Nombre Causa</label>
+                  <input type="text" class="form-control" [(ngModel)]="causaNew.nombre" name="nombre" id="nombre" required>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary"  [disabled]="formCrearCausa.invalid" data-bs-dismiss="modal">Guardar</button>
             </div>
           </form>
         </div>
@@ -89,26 +79,18 @@
       </div>
       <div class="modal-body">
         <div class="container-flud">
-          <form class="was-validated">
+          <form class="was-validated" #formUpdateCausa="ngForm" (ngSubmit)="updateCausa()">
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="causa" class="form-label">Nombre Causa</label>
-                  <input type="text" class="form-control" id="causa" required>
-                </div>
-              </div>
-            </div>
-            <div class="row g-3 align-items-center">
-              <div class="col">
-                <div class="mb-3">
-                  <label for="descripcion" class="form-label">Descripcion</label>
-                  <textarea class="form-control" name="descripcion" id="descripcion" required></textarea>
+                  <label for="nombre" class="form-label">Nombre Causa</label>
+                  <input type="text" class="form-control" [(ngModel)]="causaUpdate.nombre" name="nombre"  id="nombre" required>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
             </div>
           </form>
         </div>
@@ -130,8 +112,24 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-danger">Si</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteCausa()">Si</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <small>Justo ahora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+    <div *ngIf="success" class="toast-body">
+      {{successMessage}}
+    </div>
+    <div *ngIf="error" class="toast-body">
+      {{errorMessage}}
     </div>
   </div>
 </div>

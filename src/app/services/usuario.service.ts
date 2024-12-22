@@ -9,7 +9,7 @@ import { UsuarioCambio } from '../models/usuario-cambio';
 })
 export class UsuarioService {
 
-  private apiUrl: string = 'http://localhost:9002/usuario';
+  private apiUrl: string = 'http://localhost:9000/logins/usuario';
   constructor(private _http: HttpClient) {}
 
   gatAllusuarios(token:Token): Observable<Usuario[]> {

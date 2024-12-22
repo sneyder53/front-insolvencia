@@ -10,7 +10,7 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = 'http://localhost:9002/auth';
+  private apiUrl: string = 'http://localhost:9000/logins/auth';
   constructor(private _http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   login(userLogin: UsuarioLogin): Observable<Token> {
