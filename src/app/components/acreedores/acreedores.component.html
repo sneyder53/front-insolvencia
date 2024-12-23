@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-4"></div>
       <div class="col-auto"></div>
@@ -11,23 +11,23 @@
       </div>
     </div>
     <div class="row">
-      <table class="table table-Info table-hover">
+      <table class="table table-Info table-hover table-responsive">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col"></th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>xx</td>
-            <td>xxxxxxx</td>
+          <tr *ngFor="let acreedor of acreedores; let i = index">
+            <td>{{acreedor.id}}</td>
+            <td>{{acreedor.nombre}}</td>
             <td>
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateAcreedorModal">
+              <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#updateAcreedorModal" (click)="acreedor.id !== null ? getAcreedor(acreedor.id) : null">
                 Actualizar
               </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarAcreedor">
+              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#eliminarAcreedor" (click)="acreedor.id !== null ? getAcreedor(acreedor.id) : null">
                 Eliminar
               </button>
             </td>
@@ -46,22 +46,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="">
+        <form class="was-validated" #formCrearAcreedor="ngForm" (ngSubmit)="crearAcreedor()">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
                 <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre">
+                  <input type="text" class="form-control" id="nombre" [(ngModel)]="acreedorNew.nombre" name="nombre" id="nombre" required>
                 </div>
               </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="formCrearAcreedor.invalid" data-bs-dismiss="modal">Guardar</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -76,22 +76,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="">
+        <form class="was-validated" #formActualizarAcreedor="ngForm" (ngSubmit)="actualizarAcreedor()">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
                 <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre">
+                  <input type="text" class="form-control" id="nombre" [(ngModel)]="acreedorUpdate.nombre" name="nombre" id="nombre" required>
                 </div>
               </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="formActualizarAcreedor.invalid" data-bs-dismiss="modal">Guardar</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -109,8 +109,24 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-danger">Si</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteAcreedor()">Si</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <small>Justo ahora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+    <div *ngIf="success" class="toast-body">
+      {{successMessage}}
+    </div>
+    <div *ngIf="error" class="toast-body">
+      {{errorMessage}}
     </div>
   </div>
 </div>

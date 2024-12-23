@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="row">
-      <table class="table table-Info table-hover">
+      <table class="table table-Info table-hover table-responsive">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -26,16 +26,16 @@
         <tbody>
           <tr *ngFor="let tarifa of tarifas; let i = index">
             <td>{{tarifa.id}}</td>
-            <td>{{tarifa.rangoMenor}}</td>
-            <td>{{tarifa.rangoMayor}}</td>
-            <td>{{tarifa.honorarios}}</td>
-            <td>{{tarifa.porcentaje}}</td>
+            <td>{{tarifa.rangoMenor | currency:'USD':'symbol':'1.0-0' }}</td>
+            <td>{{tarifa.rangoMayor | currency:'USD':'symbol':'1.0-0' }}</td>
+            <td>{{tarifa.honorarios | currency:'USD':'symbol':'1.0-0' }}</td>
+            <td>{{tarifa.porcentaje  / 100 | percent:'1.0-2' }}</td>
             <td>{{tarifa.numeroCuotas}}</td>
             <td>
-              <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#actualizarHonorario">
+              <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#actualizarHonorario" (click)="tarifa.id !== null ? getTarifa(tarifa.id) : null">
                 Actualizar
               </button>
-              <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#eliminarHonorario">
+              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#eliminarHonorario" (click)="tarifa.id !== null ? getTarifa(tarifa.id) : null">
                 Eliminar
               </button>
             </td>
@@ -56,44 +56,44 @@
       </div>
       <div class="modal-body">
         <div class="container-flud">
-          <form class="was-validated">
+          <form class="was-validated" #formCrearHonorario="ngForm" (ngSubmit)="crearHonorario()">
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="valormenor" class="form-label">Menor</label>
-                  <input type="number" class="form-control" id="valormenor" required>
+                  <label for="rangoMenor" class="form-label">Menor</label>
+                  <input type="text" class="form-control" id="rangoMenor" [(ngModel)]="tarifanew.rangoMenor" name="rangoMenor" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
               <div class="col">
                 <div class="mb-3">
-                  <label for="valormayor" class="form-label">Mayor</label>
-                  <input type="number" class="form-control" id="valormayor" required>
+                  <label for="rangoMayor" class="form-label">Mayor</label>
+                  <input type="text" class="form-control" id="rangoMayor" [(ngModel)]="tarifanew.rangoMayor" name="rangoMayor" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
             </div>
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="honorario" class="form-label">Valor Honorario</label>
-                  <input type="number" class="form-control" id="honorario" required>
+                  <label for="honorarios" class="form-label">Valor Honorario</label>
+                  <input type="text" class="form-control" id="honorarios" [(ngModel)]="tarifanew.honorarios" name="honorarios" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
               <div class="col">
                 <div class="mb-3">
                   <label for="porcentaje" class="form-label">% Honorario</label>
-                  <input type="number" class="form-control" id="porcentaje" required>
+                  <input type="text" class="form-control" id="porcentaje" [(ngModel)]="tarifanew.porcentaje" name="porcentaje" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
               <div class="col">
                 <div class="mb-3">
-                  <label for="cuota" class="form-label">Cuotas</label>
-                  <input type="number" class="form-control" id="cuota" required>
+                  <label for="numeroCuotas" class="form-label">Cuotas</label>
+                  <input type="text" class="form-control" id="numeroCuotas" [(ngModel)]="tarifanew.numeroCuotas" name="numeroCuotas" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-primary" type="submit" [disabled]="formCrearHonorario.invalid" data-bs-dismiss="modal">Guardar</button>
             </div>
           </form>
         </div>
@@ -111,44 +111,44 @@
       </div>
       <div class="modal-body">
         <div class="container-flud">
-          <form class="was-validated">
+          <form class="was-validated"  #formUpdateHonorario="ngForm" (ngSubmit)="updateTarifa()">
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="valormenor" class="form-label">Menor</label>
-                  <input type="number" class="form-control" id="valormenor" required>
+                  <label for="rangoMenor" class="form-label">Menor</label>
+                  <input type="text" class="form-control" id="rangoMenor" [(ngModel)]="tarifupdate.rangoMenor" name="rangoMenor" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
               <div class="col">
                 <div class="mb-3">
-                  <label for="valormayor" class="form-label">Mayor</label>
-                  <input type="number" class="form-control" id="valormayor" required>
+                  <label for="rangoMayor" class="form-label">Mayor</label>
+                  <input type="number" class="form-control" id="rangoMayor" [(ngModel)]="tarifupdate.rangoMayor" name="rangoMayor" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
             </div>
             <div class="row g-3 align-items-center">
               <div class="col">
                 <div class="mb-3">
-                  <label for="honorario" class="form-label">Valor Honorario</label>
-                  <input type="number" class="form-control" id="honorario" required>
+                  <label for="honorarios" class="form-label">Valor Honorario</label>
+                  <input type="number" class="form-control" id="honorarios" [(ngModel)]="tarifupdate.honorarios" name="honorarios" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
               <div class="col">
                 <div class="mb-3">
                   <label for="porcentaje" class="form-label">% Honorario</label>
-                  <input type="number" class="form-control" id="porcentaje" required>
+                  <input type="number" class="form-control" id="porcentaje" [(ngModel)]="tarifupdate.porcentaje" name="porcentaje" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
               <div class="col">
                 <div class="mb-3">
-                  <label for="cuota" class="form-label">Cuotas</label>
-                  <input type="number" class="form-control" id="cuota" required>
+                  <label for="numeroCuotas" class="form-label">Cuotas</label>
+                  <input type="number" class="form-control" id="numeroCuotas" [(ngModel)]="tarifupdate.numeroCuotas" name="numeroCuotas" pattern="^[1-9]\d*$" required>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="submit">Guardar</button>
+              <button class="btn btn-primary" type="submit" data-bs-dismiss="modal" >Guardar</button>
             </div>
           </form>
         </div>
@@ -170,8 +170,25 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-danger">Si</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteTarifa()">Si</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <small>Justo ahora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+    <div *ngIf="success" class="toast-body">
+      {{successMessage}}
+    </div>
+    <div *ngIf="error" class="toast-body">
+      {{errorMessage}}
     </div>
   </div>
 </div>

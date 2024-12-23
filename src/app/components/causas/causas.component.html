@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="row">
-      <table class="table table-Info table-hover">
+      <table class="table table-Info table-hover table-responsive">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -24,10 +24,10 @@
             <td>{{ causa.id }}</td>
             <td>{{ causa.nombre }}</td>
             <td>
-              <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#actualizarCausa" (click)="causa.id !== null ? getCausa(causa.id) : null">
+              <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#actualizarCausa" (click)="causa.id !== null ? getCausa(causa.id) : null">
                 Actualizar
               </button>
-              <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#eliminarCausa" (click)="causa.id !== null ? getCausa(causa.id) : null">
+              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#eliminarCausa" (click)="causa.id !== null ? getCausa(causa.id) : null">
                 Eliminar
               </button>
             </td>
