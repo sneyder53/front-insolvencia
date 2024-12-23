@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-4"></div>
       <div class="col-auto"></div>
@@ -24,18 +24,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>xx</td>
-            <td>xxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
-            <td>xxxxxxxxxxxxxxxxxxxxxxx</td>
+          <tr *ngFor="let tarifa of tarifas; let i = index">
+            <td>{{tarifa.id}}</td>
+            <td>{{tarifa.rangoMenor}}</td>
+            <td>{{tarifa.rangoMayor}}</td>
+            <td>{{tarifa.honorarios}}</td>
+            <td>{{tarifa.porcentaje}}</td>
+            <td>{{tarifa.numeroCuotas}}</td>
             <td>
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#actualizarHonorario">
+              <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#actualizarHonorario">
                 Actualizar
               </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarHonorario">
+              <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#eliminarHonorario">
                 Eliminar
               </button>
             </td>
