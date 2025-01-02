@@ -2,8 +2,8 @@ import { Acreedor } from "./acreedor";
 
 export class Producto {
   constructor(
-    public id: string | null,
-    public nombre:String,
+    public id: number | null,
+    public nombre:string,
     public acreedor: Acreedor,
   ){}
 }

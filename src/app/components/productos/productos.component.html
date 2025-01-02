@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-4"></div>
       <div class="col-auto"></div>
@@ -11,25 +11,25 @@
       </div>
     </div>
     <div class="row">
-      <table class="table table-Info table-hover">
+      <table class="table table-Info table-hover table-responsive">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Acreedor</th>
             <th scope="col">Nombre</th>
-            <th scope="col"></th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>xx</td>
-            <td>xxxxxxx</td>
-            <td>xxxxxxx</td>
+          <tr *ngFor="let producto of productos">
+            <td>{{producto.id}}</td>
+            <td>{{producto.acreedor.nombre}}</td>
+            <td>{{producto.nombre}}</td>
             <td>
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateProductoModal">
+              <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#updateProductoModal" (click)="producto.id !== null ? getProducto(producto.id) : null">
                 Actualizar
               </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProducto">
+              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#eliminarProducto" (click)="producto.id !== null ? getProducto(producto.id) : null">
                 Eliminar
               </button>
             </td>
@@ -48,33 +48,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="">
+        <form class="was-validated" #formCrearProducto="ngForm" (ngSubmit)="crearProducto()">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="acreedor" class="col-form-label">Acreedor:</label>
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="productoNew.acreedor.id" name="acreedor" required>
                     <option selected></option>
-                    <option value="1">Acreedor 1</option>
-                    <option value="2">Acreedor 2</option>
-                    <option value="3">Acreedor 3</option>
+                    <option *ngFor="let acreedor of acreedores" value="{{acreedor.id}}">{{acreedor.nombre}}</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre">
+                  <input type="text" class="form-control" id="nombre" [(ngModel)]="productoNew.nombre" name="nombre" required>
                 </div>
               </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="formCrearProducto.invalid" data-bs-dismiss="modal">Guardar</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -88,33 +86,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="">
+        <form class="was-validated" #formActualizarProducto="ngForm" (ngSubmit)="actualizarProducto()">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="acreedor" class="col-form-label">Acreedor:</label>
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="productoUpdate.acreedor.id" name="acreedor" required>
                     <option selected></option>
-                    <option value="1">Acreedor 1</option>
-                    <option value="2">Acreedor 2</option>
-                    <option value="3">Acreedor 3</option>
+                    <option *ngFor="let acreedor of acreedores" value="{{acreedor.id}}">{{acreedor.nombre}}</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre">
+                  <input type="text" class="form-control" id="nombre" [(ngModel)]="productoUpdate.nombre" name="nombre" required>
                 </div>
               </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -133,8 +129,24 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        <button type="button" class="btn btn-danger">Si</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarProducto()">Si</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <small>Justo ahora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+    <div *ngIf="success" class="toast-body">
+      {{successMessage}}
+    </div>
+    <div *ngIf="error" class="toast-body">
+      {{errorMessage}}
     </div>
   </div>
 </div>
