@@ -47,7 +47,7 @@ export class ClientesComponent implements OnInit {
     this._clienteService.crearCliente(this.clienteNew).subscribe(data => {
       this.showToast = true;
       this.success = true;
-      this.successMessage = "Tarifa creada correctamente";
+      this.successMessage = "Cliente creado correctamente";
       setTimeout(() => {
         this.showToast = false;
         this.success = false;
@@ -56,10 +56,10 @@ export class ClientesComponent implements OnInit {
       this.getAllClientes();
     },
     error => {
-      console.log(error);
+      console.log(error.error);
       this.showToast = true;
       this.error = true;
-      this.errorMessage = error.error.message;
+      this.errorMessage = error.error;
       setTimeout(() => {
         this.showToast = false;
         this.error = false;

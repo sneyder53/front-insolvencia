@@ -16,6 +16,10 @@ export class ProductoService {
     return this._http.get<Producto[]>(this.apiUrl);
   }
 
+  getAllProductosByAcreedor(id: number | null): Observable<Producto[]> {
+    return this._http.get<Producto[]>(`${this.apiUrl}/acreedor/${id}`);
+  }
+
   getProducto(id: number | null): Observable<Producto> {
     return this._http.get<Producto>(`${this.apiUrl}/${id}`);
   }
