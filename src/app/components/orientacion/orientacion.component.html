@@ -25,7 +25,6 @@
             <input type="text" class="form-control" id="identificacion" [(ngModel)]="cliente.identificacion" name="identificacion"  disabled>
           </div>
         </div>
-
         <div class="col-4">
           <div class="mb-3">
             <label for="nombres" class="form-label">Nombre</label>
@@ -134,79 +133,79 @@
               <tr>
                 <td>ENERGÍA</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.energia" name="energia" id="energia" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>AGUA, ALCANTARILLADO Y ASEO</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.agua" name="agua" id="agua"  aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>GAS</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.gas" name="gas" id="gas" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>TELECOMUNICACIONES (Móvil- Fijo)</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.telecomunicaciones" name="telecomunicaciones" id="telecomunicaciones" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>TELEVISIÓN</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.television" name="television" id="television" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>ARRIENDO</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.arriendo" name="arriendo" id="arriendo" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>ADMINISTRACIÓN</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.administracion" name="administracion" id="administracion" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>SALUD</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.salud" name="salud" id="salud" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>SEGUROS</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.seguros" name="seguros" id="seguros" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>ALIMENTACIÓN</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.alimentacion" name="alimentacion" id="alimentacion" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>EDUCACIÓN</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.educacion" name="educacion" id="educacion" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>TRANSPORTE</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.transporte" name="transporte" id="transporte" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
                 <td>OTROS GASTOS: Cuales CARRO-TARJETAS</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.otros" name="otros" id="otros" aria-label="Valor" value="0">
                 </td>
               </tr>
               <tr>
@@ -252,15 +251,20 @@
             <tbody>
               <tr>
                 <td>
-                  <input class="form-control"  type="text" name="marca" id="marca" placeholder="Marca">
-                  <input class="form-control"  type="text" name="placa" id="placa" placeholder="Placa">
-                  <input class="form-control"  type="text" name="linea" id="linea" placeholder="Linea">
+                  <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="mueble.tipo" name="tipo" required>
+                      <option selected></option>
+                      <option  value="Marca">Marca</option>
+                      <option  value="Placa">Placa</option>
+                      <option  value="Linea">Linea</option>
+                    </select>
+                  </div>
                 </td>
                 <td>
-                  <input class="form-control"  type="number" name="valor" id="valor" placeholder="0">
+                  <input class="form-control"  type="number" [(ngModel)]="mueble.valor" name="valor" id="valor" placeholder="0">
                 </td>
                 <td>
-                  <textarea class="form-control" name="afectacion" id="afectacion" placeholder="Afectacion"></textarea>
+                  <textarea class="form-control" [(ngModel)]="mueble.afectacion"  name="afectacion" id="afectacion" placeholder="Afectacion"></textarea>
                 </td>
               </tr>
               <tr>

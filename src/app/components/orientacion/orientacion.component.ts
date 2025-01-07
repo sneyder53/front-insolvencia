@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Acreedor } from 'src/app/models/acreedor';
+import { BienesInmueble } from 'src/app/models/bienes-inmueble';
+import { BienesMueble } from 'src/app/models/bienes-mueble';
 import { Causa } from 'src/app/models/causa';
 import { Cliente } from 'src/app/models/cliente';
+import { GastosManutencion } from 'src/app/models/gastos-manutencion';
 import { InsolvenciaProducto } from 'src/app/models/insolvencia-producto';
 import { Producto } from 'src/app/models/producto';
 import { AcreedorService } from 'src/app/services/acreedor.service';
@@ -24,6 +27,11 @@ export class OrientacionComponent implements OnInit {
   acreedores : Acreedor[] = [];
   productosInsolvencia : InsolvenciaProducto[] = [];
   productos: Producto[] = [];
+  gastos:GastosManutencion = new GastosManutencion(null,0,0,0,0,0,0,0,0,0,0,0,0,0);
+  muebles: BienesMueble[] = [];
+  mueble : BienesMueble = new BienesMueble(null,"","",0,"");
+  inmuebles: BienesInmueble[] = [];
+  inmueble : BienesInmueble = new BienesInmueble(null,"","","",0,"");
   insolvenciaProducto: InsolvenciaProducto = {
     id: null,
     nombre: '',
