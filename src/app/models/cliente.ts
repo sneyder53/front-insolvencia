@@ -9,6 +9,7 @@ export class Cliente {
     public telefono: string,
     public profesion: string,
     public camaraComercio: boolean,
+    public orientacion: boolean,
     public ingresos: number,
     public descuentos: number,
   ){}

@@ -12,8 +12,8 @@ import { ClienteService } from 'src/app/services/cliente.service';
 export class ClientesComponent implements OnInit {
 
   public clientes: Cliente[] = [];
-  public cliente: Cliente = new Cliente(null, "", "", "", "", "", "", "", false, 0, 0);
-  public clienteNew: Cliente = new Cliente(null, "", "", "", "", "", "", "", false, 0, 0);
+  public cliente: Cliente = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
+  public clienteNew: Cliente = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
   public showToast = false;
   public success = false;
   public error = false;
@@ -52,7 +52,7 @@ export class ClientesComponent implements OnInit {
         this.showToast = false;
         this.success = false;
       }, 3000);
-      this.clienteNew = new Cliente(null, "", "", "", "", "", "", "", false, 0, 0);
+      this.clienteNew = new Cliente(null, "", "", "", "", "", "", "", false, false, 0, 0);
       this.getAllClientes();
     },
     error => {
@@ -64,7 +64,7 @@ export class ClientesComponent implements OnInit {
         this.showToast = false;
         this.error = false;
       }, 3000);
-      this.clienteNew = new Cliente(null, "", "", "", "", "", "", "", false, 0, 0);
+      this.clienteNew = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
     });
   }
 

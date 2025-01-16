@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-navbar></app-navbar>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-4"></div>
       <div class="col-auto"></div>
@@ -28,7 +28,7 @@
             <td>{{cliente.apellidos}}</td>
             <td>{{cliente.email}}</td>
             <td>
-              <button class="btn btn-success" (click)="orientacion(cliente.id)">Orientacion</button>
+              <button class="btn btn-success"  [disabled]="cliente.orientacion" (click)="orientacion(cliente.id)">Orientacion</button>
               <button class="btn btn-secondary">Contrato</button>
               <button class="btn btn-secondary">Poder</button>
               <button class="btn btn-secondary">Recibo</button>

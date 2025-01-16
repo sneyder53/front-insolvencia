@@ -1,10 +1,9 @@
+import { Producto } from "./producto";
+
 export interface InsolvenciaProducto {
   id: number | null;
-  nombre: string;
-  acreedor: {
-    id: number | null;
-    nombre: string;
-  };
+  insolvenciaId: number | null;
+  productoId: Producto;
   valorDeuda: number;
   diasMora: number;
 }

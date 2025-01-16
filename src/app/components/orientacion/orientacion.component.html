@@ -2,14 +2,17 @@
   <div class="row align-items-center mt-5">
     <div class="col"></div>
     <div class="col-auto">
-      <h2><strong>ORIENTACIÓN INSOLVENCIA ECONÓMICA DE PERSONA NATURAL NO COMERCIANTE</strong></h2>
+      <h2>
+        <strong>ORIENTACIÓN INSOLVENCIA ECONÓMICA DE PERSONA NATURAL NO
+          COMERCIANTE</strong>
+      </h2>
     </div>
     <div class="col"></div>
   </div>
   <div class="g-3 align-items-center mt-5 formulario">
-    <form >
+    <form class="was-validated" #formOrientacion="ngForm" (ngSubmit)="guardarOrientacion()">
       <div class="row">
-        <hr>
+        <hr />
       </div>
       <div class="row">
         <div class="col"></div>
@@ -22,28 +25,31 @@
         <div class="col-4">
           <div class="mb-3">
             <label for="identificacion" class="form-label">Cedula</label>
-            <input type="text" class="form-control" id="identificacion" [(ngModel)]="cliente.identificacion" name="identificacion"  disabled>
+            <input type="text" class="form-control" id="identificacion" [(ngModel)]="cliente.identificacion"
+              name="identificacion" disabled />
           </div>
         </div>
         <div class="col-4">
           <div class="mb-3">
             <label for="nombres" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombres" [(ngModel)]="cliente.nombres" name="nombres" disabled>
+            <input type="text" class="form-control" id="nombres" [(ngModel)]="cliente.nombres" name="nombres"
+              disabled />
           </div>
         </div>
         <div class="col-4">
           <div class="mb-3">
             <label for="telefono" class="form-label">Telefono</label>
-            <input type="text" class="form-control" id="telefono"  [(ngModel)]="cliente.telefono" name="telefono" disabled>
+            <input type="text" class="form-control" id="telefono" [(ngModel)]="cliente.telefono" name="telefono"
+              disabled />
           </div>
         </div>
       </div>
       <div class="row">
-        <hr>
+        <hr />
       </div>
-      <div class="row ">
+      <div class="row">
         <div class="col"></div>
-        <div class="col-auto ">
+        <div class="col-auto">
           <h3><strong>CAUSAS DE LA INSOLVENCIA</strong></h3>
         </div>
         <div class="col"></div>
@@ -51,19 +57,20 @@
       <div class="row m-2">
         <div class="col-4" *ngFor="let causa of causas">
           <div class="mb-3">
-            <div class="form-check" >
-              <input class="form-check-input" type="checkbox" value="{{causa.id}}" id="{{causa.id}}" name="{{causa.nombre}}" (change)="onCheckboxChange($event)">
-              <label class="form-check-label" for="{{causa.id}}">
-                {{causa.nombre}}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="{{ causa.id }}" id="{{ causa.id }}"
+                name="{{ causa.nombre }}" (change)="onCheckboxChange($event)" />
+              <label class="form-check-label" for="{{ causa.id }}">
+                {{ causa.nombre }}
               </label>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <hr>
+        <hr />
       </div>
-      <div class="row ">
+      <div class="row">
         <div class="col"></div>
         <div class="col-auto">
           <h3><strong>ACREEDORES</strong></h3>
@@ -95,13 +102,21 @@
             </thead>
             <tbody>
               <tr *ngFor="let productoin of productosInsolvencia; let i = index">
-                <td>{{productoin.id}}</td>
-                <td>{{productoin.acreedor.nombre}}</td>
-                <td>{{productoin.nombre}}</td>
-                <td>{{productoin.valorDeuda}}</td>
-                <td>{{productoin.diasMora}}</td>
+                <td>{{ productoin.id }}</td>
+                <td>{{ productoin.productoId.acreedor.nombre }}</td>
+                <td>{{ productoin.productoId.nombre }}</td>
+                <td>{{ productoin.valorDeuda }}</td>
+                <td>{{ productoin.diasMora }}</td>
                 <td>
-                  <button class="btn btn-danger" (click)="elminiarProducto(i)">Eliminar</button>
+                  <button class="btn btn-danger" (click)="elminiarProducto(i)">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">TOTAL DEUDA PRODUCTOS</td>
+                <td colspan="3">
+                  <input class="form-control" type="text" id="totalProductos" [(ngModel)]="insolvencia.totalProductos" name="totalProductos" aria-label="total" pattern="^[1-9]\d*$" required />
                 </td>
               </tr>
             </tbody>
@@ -110,11 +125,11 @@
         <div class="col"></div>
       </div>
       <div class="row">
-        <hr>
+        <hr />
       </div>
       <div class="row m-2">
         <div class="col-4"></div>
-        <div class="col-auto ">
+        <div class="col-auto">
           <h3><strong>GASTOS DE MANUTENCIÓN </strong></h3>
         </div>
         <div class="col-4"></div>
@@ -133,85 +148,98 @@
               <tr>
                 <td>ENERGÍA</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.energia" name="energia" id="energia" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.energia" name="energia" id="energia"
+                    aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>AGUA, ALCANTARILLADO Y ASEO</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.agua" name="agua" id="agua"  aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.aguaalcantarilladoaseo" name="aguaalcantarilladoaseo" id="aguaalcantarilladoaseo"
+                    aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>GAS</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.gas" name="gas" id="gas" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.gas" name="gas" id="gas"
+                    aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>TELECOMUNICACIONES (Móvil- Fijo)</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.telecomunicaciones" name="telecomunicaciones" id="telecomunicaciones" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.telecomunicacion"
+                    name="telecomunicacion" id="telecomunicacion" aria-label="Valor"  (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>TELEVISIÓN</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.television" name="television" id="television" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.television" name="television"
+                    id="television" aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()"  />
                 </td>
               </tr>
               <tr>
                 <td>ARRIENDO</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.arriendo" name="arriendo" id="arriendo" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.arriendo" name="arriendo" id="arriendo"
+                    aria-label="Valor"  />
                 </td>
               </tr>
               <tr>
                 <td>ADMINISTRACIÓN</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.administracion" name="administracion" id="administracion" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.administracion" name="administracion"
+                    id="administracion" aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>SALUD</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.salud" name="salud" id="salud" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.salud" name="salud" id="salud"
+                    aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>SEGUROS</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.seguros" name="seguros" id="seguros" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.seguro" name="seguros" id="seguros"
+                    aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>ALIMENTACIÓN</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.alimentacion" name="alimentacion" id="alimentacion" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.alimentacion" name="alimentacion"
+                    id="alimentacion" aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>EDUCACIÓN</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.educacion" name="educacion" id="educacion" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.educacion" name="educacion"
+                    id="educacion" aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>TRANSPORTE</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.transporte" name="transporte" id="transporte" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.transporte" name="transporte"
+                    id="transporte" aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()"  />
                 </td>
               </tr>
               <tr>
                 <td>OTROS GASTOS: Cuales CARRO-TARJETAS</td>
                 <td>
-                  <input class="form-control" type="number" [(ngModel)]="gastos.otros" name="otros" id="otros" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" [(ngModel)]="gastos.otros" name="otros" id="otros"
+                    aria-label="Valor" (ngModelChange)="calcularTotalGastosManutencion()" />
                 </td>
               </tr>
               <tr>
                 <td>TOTAL</td>
                 <td>
-                  <input class="form-control" type="number" aria-label="Valor" value="0">
+                  <input class="form-control" type="number" id="totalGastosManutencion" [(ngModel)]="insolvencia.totalGastosManutencion" name="totalGastosManutencion" aria-label="Valor" required />
                 </td>
               </tr>
             </tbody>
@@ -220,18 +248,18 @@
         <div class="col"></div>
       </div>
       <div class="row">
-        <hr>
+        <hr />
       </div>
       <div class="row m-2">
         <div class="col"></div>
-        <div class="col-auto ">
-          <h3><strong>RELACIÓN DE BIENES  </strong></h3>
+        <div class="col-auto">
+          <h3><strong>RELACIÓN DE BIENES</strong></h3>
         </div>
         <div class="col"></div>
       </div>
       <div class="row m-2">
         <div class="col"></div>
-        <div class="col-auto ">
+        <div class="col-auto">
           <h4><strong>BIENES MUEBLES</strong></h4>
           <h5>Vehículos, Enceres, Electrodomésticos, ETC.</h5>
         </div>
@@ -240,51 +268,9 @@
       <div class="row m-2">
         <div class="col"></div>
         <div class="col-auto">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Tipo de Bien</th>
-                <th scope="col">Valor del Bien</th>
-                <th scope="col">Tipo de Afectacion (prenda)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="mb-3">
-                    <select class="form-select" aria-label="Default select example" [(ngModel)]="mueble.tipo" name="tipo" required>
-                      <option selected></option>
-                      <option  value="Marca">Marca</option>
-                      <option  value="Placa">Placa</option>
-                      <option  value="Linea">Linea</option>
-                    </select>
-                  </div>
-                </td>
-                <td>
-                  <input class="form-control"  type="number" [(ngModel)]="mueble.valor" name="valor" id="valor" placeholder="0">
-                </td>
-                <td>
-                  <textarea class="form-control" [(ngModel)]="mueble.afectacion"  name="afectacion" id="afectacion" placeholder="Afectacion"></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Total: </strong>
-                </td>
-                <td>
-                  <input class="form-control"  type="number" name="total" id="total" placeholder="0" readonly>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col"></div>
-      </div>
-      <div class="row m-2">
-        <div class="col"></div>
-        <div class="col-auto ">
-          <h4><strong>BIENES INMUEBLES</strong></h4>
-          <h5>Casas, apartamentos, fincas, lotes, bodegas, derechos de Fidi, otros</h5>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarMuebleModal">
+            Agregar Mueble
+          </button>
         </div>
         <div class="col"></div>
       </div>
@@ -295,32 +281,22 @@
             <thead>
               <tr>
                 <th scope="col">Tipo de Bien</th>
+                <th scope="col">Numero de Bien</th>
                 <th scope="col">Valor del Bien</th>
-                <th scope="col">Tipo de Afectacion</th>
+                <th scope="col">Tipo de Afectacion (prenda)</th>
+                <th scope="col">Accion</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let mueble of muebles; let i = index">
+                <td>{{ mueble.tipo }}</td>
+                <td>{{ mueble.numero }}</td>
+                <td>{{ mueble.valor }}</td>
+                <td>{{ mueble.afectacion ? "Prenda" : "No Prenda" }}</td>
                 <td>
-                  <select class="form-control" name="tipo" id="tipo">
-                    <option value="">Ninguno</option>
-                    <option value="casa">Casa</option>
-                    <option value="lote">Lote</option>
-                    <option value="apartamento">Apartamento</option>
-                  </select>
-                  <input class="form-control"  type="text" name="direccion" id="direccion" placeholder="Direccion">
-                  <input class="form-control"  type="text" name="matricula" id="matricula" placeholder="Matricula Inmobiliaria">
-                </td>
-                <td>
-                  <input class="form-control"  type="number" name="valor" id="valor" placeholder="0">
-                </td>
-                <td>
-                  <select class="form-control" name="tipo" id="tipo">
-                    <option value="">Ninguno</option>
-                    <option value="hipoteca">Hipoteca</option>
-                    <option value="patrimonio">Patrimonio Familiar</option>
-                    <option value="afectacion">Afectacion a la vivienda</option>
-                  </select>
+                  <button class="btn btn-danger" (click)="elminiarMueble(i)">
+                    Eliminar
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -328,7 +304,7 @@
                   <strong>Total: </strong>
                 </td>
                 <td>
-                  <input class="form-control"  type="number" name="total" id="total" placeholder="0" readonly>
+                  <input class="form-control" type="number" [(ngModel)]="insolvencia.totalMuebles" name="totalMuebles" id="totalMuebles" placeholder="0" readonly />
                 </td>
               </tr>
             </tbody>
@@ -338,41 +314,113 @@
       </div>
       <div class="row m-2">
         <div class="col"></div>
-        <div class="col-auto ">
+        <div class="col-auto">
+          <h4><strong>BIENES INMUEBLES</strong></h4>
+          <h5>
+            Casas, apartamentos, fincas, lotes, bodegas, derechos de Fidi, otros
+          </h5>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarInmuebleModal">
+            Agregar Inmueble
+          </button>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Tipo de Bien</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Matricula Inmobiliaria</th>
+                <th scope="col">Valor del Bien</th>
+                <th scope="col">Tipo de Afectacion</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inmueble of inmuebles; let i = index">
+                <td>{{ inmueble.tipo }}</td>
+                <td>{{ inmueble.direccion }}</td>
+                <td>{{ inmueble.matricula }}</td>
+                <td>{{ inmueble.valor }}</td>
+                <td>{{ inmueble.afectacion }}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="elminiarInmueble(i)">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Total: </strong>
+                </td>
+                <td>
+                  <input class="form-control" type="number" [(ngModel)]="insolvencia.totalInmuebles" name="totalInmuebles" id="totalInmuebles" placeholder="0" readonly />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
           <h3><strong>INFORMACION JUDICIAL</strong></h3>
           <h5>Procesos en contra (ejecutivos y coactivos)</h5>
         </div>
         <div class="col"></div>
       </div>
       <div class="row m-2">
-        <div class="col">
-          <div class="mb-3">
-            <label for="juzgado" class="form-label">Juzgado</label>
-            <input type="text" class="form-control" id="juzgado">
-          </div>
+        <div class="col"></div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarJudicialModal">
+            Agregar Judicial
+          </button>
         </div>
-        <div class="col">
-          <div class="mb-3">
-            <label for="radicado" class="form-label">Radicado</label>
-            <input type="text" class="form-control" id="radicado">
-          </div>
-        </div>
-        <div class="col">
-          <div class="mb-3">
-            <label for="demandante" class="form-label">Demandante</label>
-            <input type="text" class="form-control" id="demandante" >
-          </div>
-        </div>
-        <div class="col">
-          <div class="mb-3">
-            <label for="proceso" class="form-label">Tipo de Proceso</label>
-            <input type="text" class="form-control" id="proceso" >
-          </div>
-        </div>
+        <div class="col"></div>
       </div>
       <div class="row m-2">
         <div class="col"></div>
-        <div class="col-auto ">
+        <div class="col-auto">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Juzgado</th>
+                <th scope="col">Radicado</th>
+                <th scope="col">Demandante</th>
+                <th scope="col">Tipo de Proceso</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let judicial of judiciales; let i = index">
+                <td>{{ judicial.juzgado }}</td>
+                <td>{{ judicial.radicado }}</td>
+                <td>{{ judicial.demandante }}</td>
+                <td>{{ judicial.tipoProceso }}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="elminiarJudicial(i)">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-2">
+        <div class="col"></div>
+        <div class="col-auto">
           <h3><strong>PROPUESTA DE PAGO</strong></h3>
         </div>
         <div class="col"></div>
@@ -380,22 +428,23 @@
       <div class="row m-2">
         <div class="col">
           <div class="mb-3">
-            <label for="valorcuota" class="form-label">Valor Cuota Mensual</label>
-            <input type="text" class="form-control" id="valorcuota" readonly >
+            <label for="varloCuotaMensual" class="form-label">Valor Cuota Mensual</label>
+            <input type="text" class="form-control" [(ngModel)]="insolvencia.varloCuotaMensual" name="varloCuotaMensual" id="varloCuotaMensual" required />
           </div>
         </div>
         <div class="col">
           <div class="mb-3">
             <label for="tiempo" class="form-label">Tiempo</label>
-            <input type="text" class="form-control" id="tiempo" readonly >
+            <input type="text" class="form-control" [(ngModel)]="insolvencia.tiempo" name="tiempo" id="tiempo" required />
           </div>
         </div>
       </div>
       <div class="row m-2">
         <div class="col"></div>
-        <div class="col-auto ">
-          <h3><strong>BENEFICIOS DE LA LEY DE INSOLVENCIA ECONOMICA</strong></h3>
-
+        <div class="col-auto">
+          <h3>
+            <strong>BENEFICIOS DE LA LEY DE INSOLVENCIA ECONOMICA</strong>
+          </h3>
         </div>
         <div class="col"></div>
       </div>
@@ -403,19 +452,20 @@
         <div class="col"></div>
         <div class="col-auto">
           <p>
-            1. Suspensión de procesos <br>
-            2. Suspensión de libranzas <br>
-            3. No embargos <br>
-            4. No procesos judiciales <br>
-            5. No suspensión de servicios públicos domiciliarios <br>
-            6. Protección del patrimonio <br>
-            7. Fórmulas de pago que pueden incluir: condonación de intereses, pagos a capital, periodos
-            de gracia.
+            1. Suspensión de procesos <br />
+            2. Suspensión de libranzas <br />
+            3. No embargos <br />
+            4. No procesos judiciales <br />
+            5. No suspensión de servicios públicos domiciliarios <br />
+            6. Protección del patrimonio <br />
+            7. Fórmulas de pago que pueden incluir: condonación de intereses,
+            pagos a capital, periodos de gracia.
           </p>
           <p>
-            ANEXOS NECESARIOS: deberá anexar copia de su documento de identidad, certificado de ingresos,
-            certificación de existencia y representación legal de los acreedores en caso de ser entidades expedida por la
-            correspondiente cámara de comercio.
+            ANEXOS NECESARIOS: deberá anexar copia de su documento de identidad,
+            certificado de ingresos, certificación de existencia y
+            representación legal de los acreedores en caso de ser entidades
+            expedida por la correspondiente cámara de comercio.
           </p>
         </div>
         <div class="col"></div>
@@ -423,68 +473,290 @@
       <div class="row m-2">
         <div class="col"></div>
         <div class="col-auto">
-
-            <button class="btn btn-info m-1" (click)="volver()" >volver</button>
-
-
-            <button class="btn btn-success m-1" (click)="generar()" >Guardar</button>
-
+          <button class="btn btn-info m-1" (click)="volver()">volver</button>
+          <button class="btn btn-success m-1" type="submit" [disabled]="formOrientacion.invalid">
+            Guardar
+          </button>
         </div>
         <div class="col"></div>
       </div>
     </form>
   </div>
-
 </div>
 
-
-<div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="cagregarProductoModalLabel">PRODUCTOS</h1>
+        <h1 class="modal-title fs-5" id="cagregarProductoModalLabel">
+          PRODUCTOS
+        </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="was-validated" #formCrearCliente="ngForm" (ngSubmit)="agregarProducto()">
+        <form class="was-validated" #formAgregaProducto="ngForm" (ngSubmit)="agregarProducto()">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="acreedor" class="col-form-label">Acreedor:</label>
-                    <select class="form-select" aria-label="Default select example" [(ngModel)]="insolvenciaProducto.acreedor.id" name="acreedor" (change)="listProductosByAcreedor(insolvenciaProducto.acreedor.id)" required>
-                      <option selected></option>
-                      <option *ngFor="let acreedor of acreedores" value="{{acreedor.id}}">{{acreedor.nombre}}</option>
-                    </select>
-                  </div>
+                <div class="mb-3">
+                  <label for="acreedor" class="col-form-label">Acreedor:</label>
+                  <select class="form-select" aria-label="Default select example"
+                    [(ngModel)]="insolvenciaProducto.productoId.acreedor.id" name="acreedor" (change)="
+                      listProductosByAcreedor(insolvenciaProducto.productoId.acreedor.id)
+                    " required>
+                    <option selected></option>
+                    <option *ngFor="let acreedor of acreedores" value="{{ acreedor.id }}">
+                      {{ acreedor.nombre }}
+                    </option>
+                  </select>
+                </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="producto" class="col-form-label">Producto:</label>
-                  <select class="form-select" aria-label="Default select example" [(ngModel)]="insolvenciaProducto.id" name="producto" required>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="insolvenciaProducto.productoId.id"
+                    name="producto" required>
                     <option selected></option>
-                    <option *ngFor="let producto of productos" value="{{producto.id}}">{{producto.nombre}}</option>
+                    <option *ngFor="let producto of productos" value="{{ producto.id }}">
+                      {{ producto.nombre }}
+                    </option>
                   </select>
                 </div>
-            </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="valorDeuda" class="col-form-label">Valor Deuda:</label>
-                  <input type="text" class="form-control" id="valorDeuda" [(ngModel)]="insolvenciaProducto.valorDeuda" name="valorDeuda" required>
+                  <input type="text" class="form-control" id="valorDeuda" [(ngModel)]="insolvenciaProducto.valorDeuda"
+                    name="valorDeuda" required />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="diasMora" class="col-form-label">Dias de Mora:</label>
-                  <input type="text" class="form-control" id="diasMora" [(ngModel)]="insolvenciaProducto.diasMora" name="diasMora" required>
+                  <input type="text" class="form-control" id="diasMora" [(ngModel)]="insolvenciaProducto.diasMora"
+                    name="diasMora" required />
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary" [disabled]="formCrearCliente.invalid" data-bs-dismiss="modal">Agregar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="formAgregaProducto.invalid"
+                data-bs-dismiss="modal">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="agregarMuebleModal" tabindex="-1" aria-labelledby="agregarMuebleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="agregarMuebleModalLabel">MUEBLES</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="was-validated" #formAgregarMueble="ngForm" (ngSubmit)="agregarMueble()">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="tipo" class="col-form-label">Tipo de Bien:</label>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="mueble.tipo" name="tipo"
+                    required>
+                    <option selected></option>
+                    <option value="Marca">Marca</option>
+                    <option value="Placa">Placa</option>
+                    <option value="Linea">Linea</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="numero" class="col-form-label">Numero Bien:</label>
+                  <input type="text" class="form-control" id="numero" [(ngModel)]="mueble.numero" name="numero"
+                    required />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="valor" class="col-form-label">Valor Bien:</label>
+                  <input type="text" class="form-control" id="valor" [(ngModel)]="mueble.valor" name="valor" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <div class="form-check form-switch mt-4">
+                    <label class="form-check-label" for="afectacion">Prenda</label>
+                    <input class="form-check-input" type="checkbox" role="switch" id="afectacion"
+                      [(ngModel)]="mueble.afectacion" name="afectacion" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="formAgregarMueble.invalid"
+                data-bs-dismiss="modal">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="agregarInmuebleModal" tabindex="-1" aria-labelledby="agregarInmuebleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="agregarInmuebleModalLabel">
+          INMUEBLE
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="was-validated" #formAgregarInmueble="ngForm" (ngSubmit)="agregarInmueble()">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label for="tipo" class="col-form-label">Tipo de Bien:</label>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="inmueble.tipo"
+                    name="tipo" required>
+                    <option selected></option>
+                    <option value="casa">Casa</option>
+                    <option value="lote">Lote</option>
+                    <option value="apartamento">Apartamento</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="direccion" class="col-form-label">Direccion:</label>
+                  <input type="text" class="form-control" id="numero" [(ngModel)]="inmueble.direccion" name="direccion"
+                    required />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label for="matricula" class="col-form-label">Matricula Inmobiliaria</label>
+                  <input type="text" class="form-control" id="matricula" [(ngModel)]="inmueble.matricula"
+                    name="matricula" required />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="valor" class="col-form-label">Valor Bien:</label>
+                  <input type="text" class="form-control" id="valor" [(ngModel)]="inmueble.valor" name="valor"
+                    required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="col-form-label" for="afectacion">Afectacion</label>
+                  <select class="form-control" name="afectacion" id="afectacion" [(ngModel)]="inmueble.afectacion"
+                    name="afectacion" required>
+                    <option value="">Ninguno</option>
+                    <option value="hipoteca">Hipoteca</option>
+                    <option value="patrimonio familiar">
+                      Patrimonio Familiar
+                    </option>
+                    <option value="afectacion a la vivienda">
+                      Afectacion a la vivienda
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="formAgregarInmueble.invalid"
+                data-bs-dismiss="modal">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="agregarJudicialModal" tabindex="-1" aria-labelledby="agregarJudicialModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="agregarJudicialModalLabel">
+          JUDICIAL
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="was-validated" #formAgregarJudicial="ngForm" (ngSubmit)="agregarJudicial()">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label for="juzgado" class="col-form-label">Juzgado</label>
+                  <input type="text" class="form-control" id="juzgado" [(ngModel)]="judicial.juzgado" name="juzgado"
+                    required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="radicado" class="col-form-label">Radicado:</label>
+                  <input type="text" class="form-control" id="radicado" [(ngModel)]="judicial.radicado" name="radicado"
+                    required />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="demandante" class="col-form-label">Demandante:</label>
+                  <input type="text" class="form-control" id="valor" [(ngModel)]="judicial.demandante" name="demandante"
+                    required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="tipoProceso" class="col-form-label">Tipo Proceso:</label>
+                  <input type="text" class="form-control" id="tipoProceso" [(ngModel)]="judicial.tipoProceso"
+                    name="tipoProceso" required />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="formAgregarJudicial.invalid"
+                data-bs-dismiss="modal">
+                Agregar
+              </button>
             </div>
           </div>
         </form>
