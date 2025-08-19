@@ -4,13 +4,13 @@
     <div class="card-group">
       <div *ngFor="let insolvencia of insolvencias" class="card text-bg-light mt-3 mb-3">
         <div class="card-header">
-          {{ insolvencia.cliente.nombres}}  {{insolvencia.cliente.apellidos}}
+          {{ insolvencia.cliente?.nombres}}  {{insolvencia.cliente?.apellidos}}
           <div class="text-end text-primary">
             {{ insolvencia.estado }}
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{insolvencia.cliente.email}}  {{insolvencia.cliente.telefono}}</h5>
+          <h5 class="card-title">{{insolvencia.cliente?.email}}  {{insolvencia.cliente?.telefono}}</h5>
 
           <p class="card-text">
             Total Gastos Manutencion : {{insolvencia.totalGastosManutencion}} <br>
@@ -18,9 +18,351 @@
           </p>
         </div>
         <div class="card-footer">
-          <button type="button" class="btn btn-info btn-sm">Detalle</button>
+          <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#DetalleInsolvencia" (click)="insolvencia.id !== null && getInsolvenciaById(insolvencia.id)"  >Detalle</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="DetalleInsolvencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="DetalleInsolvenciaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="DetalleInsolvenciaLabel">Detalle Insolvencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-flud">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-center mb-3">
+                <img src="../../../assets/img/LOGO 1.png" alt="Logo Carolina Diaz Abogados" class="rounded mx-auto d-block" width="200" height="200">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-justify">
+                A continuación, se encuentran los formatos de obligaciones, ingresos y patrimonio, envíelos de vuelta de acuerdo a las
+                <strong>instrucciones</strong> suministradas. <strong>Instrucciones de diligenciamiento</strong>:
+              </p>
+              <p class="text-justify">
+                Apreciado cliente, para que nuestra consultoría pueda brindarle el mejor servicio y de esta manera usted pueda llevarse el mayor
+                beneficio de la misma tenga en cuenta:
+              </p>
+              <ol>
+                <li>
+                  Diligencie los campos completamente, no omita información de sus deudas o de sus ingresos, nosotros estamos para
+                  asesorarlo y ayudarle en su bienestar, inclúyalo TODO.
+                </li>
+                <li>
+                  Cuando diligencie el formato de obligaciones hágalo obligación por obligación, tarjeta por tarjeta,
+                  inclusive con la franquicia asociada si usted lo desea.
+                </li>
+                <li>
+                  Si no le alcanza el espacio, si es en una hoja impresa diligencie en otra hoja con la información faltante,
+                  si está diligenciándolo en su computador ingrese más espacios al final de la tabla.
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 m-3">
+              <h5 class="text-center">ORIENTACIÓN INSOLVENCIA ECONÓMICA DE PERSONA NATURAL NO COMERCIANTE</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Cliente</h5>
+              <p><strong>Nombres y Apellidos: </strong> {{insolvenciaUpdate.cliente?.nombres}} {{insolvenciaUpdate.cliente?.apellidos}}</p>
+              <p><strong>Identificacion: </strong> {{insolvenciaUpdate.cliente?.identificacion}}</p>
+              <p><strong>Direccion: </strong> {{insolvenciaUpdate.cliente?.direccion}}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Teléfono: </strong> {{insolvenciaUpdate.cliente?.telefono}}</p>
+              <p><strong>Email: </strong> {{insolvenciaUpdate.cliente?.email}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Estado</h5>
+              <p>{{insolvenciaUpdate.estado}}</p>
+              <h5 class="text-center">CAUSAS DE LA INSOLVENCIA</h5>
+              <ul>
+                <li *ngFor="let causa of insolvenciaUpdate.causas">
+                  {{causa.nombre}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="text-center">ACREEDORES</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Monto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let producto of insolvenciaUpdate.insolvenciaProductos">
+                    <td>{{producto.productoId.nombre}}</td>
+                    <td>{{producto.valorDeuda| currency}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>{{insolvenciaUpdate.totalProductos | currency}}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Gastos de Manutención</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Monto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Energia</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.energia | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Agua y Alcantanillado y Aseo</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.aguaalcantarilladoaseo | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Gas</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.gas | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Telecomunicacion</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.telecomunicacion | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Television</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.television | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Arriendo</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.arriendo | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Administración</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.administracion | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Salud</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.salud | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Seguro</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.seguro | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Alimentación</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.alimentacion | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Vestimenta</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.educacion | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Educación</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.transporte | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td>Transporte</td>
+                    <td>{{insolvenciaUpdate.gastosManutencion?.otros | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>{{insolvenciaUpdate.totalGastosManutencion | currency}}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Muebles</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Afectación</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let mueble of insolvenciaUpdate.bienesMuebles">
+                    <td>{{mueble.tipo}}</td>
+                    <td>{{mueble.numero}}</td>
+                    <td>{{mueble.afectacion ? 'Prenda' : 'No Prenda'}}</td>
+                    <td>{{mueble.valor | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Total Muebles</strong></td>
+                    <td><strong>{{insolvenciaUpdate.totalMuebles | currency}}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+
+              <h5>Inmuebles</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Afectación</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let inmueble of insolvenciaUpdate.bienesInmuebles">
+                    <td>{{inmueble.tipo}}</td>
+                    <td>{{inmueble.direccion}}</td>
+                    <td>{{inmueble.matricula}}</td>
+                    <td>{{inmueble.afectacion ? 'Prenda' : 'No Prenda'}}</td>
+                    <td>{{inmueble.valor | currency}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Total Inmuebles</strong></td>
+                    <td><strong>{{insolvenciaUpdate.totalInmuebles | currency}}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>judiciales</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Juzgado</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Radicado</th>
+                    <th scope="col">Demandante</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let judicial of insolvenciaUpdate.judicial">
+                    <td>{{judicial.juzgado}}</td>
+                    <td>{{judicial.radicado}}</td>
+                    <td>{{judicial.tipoProceso}}</td>
+                    <td>{{judicial.demandante}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Valor Cuota Mensual </h5>
+              <p>{{insolvenciaUpdate.varloCuotaMensual}}</p>
+            </div>
+            <div class="col-md-6">
+              <h5>Tiempo</h5>
+              <p>{{insolvenciaUpdate.tiempo}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="text-center">EFECTOS DE LA NEGOCIACIÓN DE DEUDAS</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 justify-content-center">
+              <ol>
+                <li>Suspensión de procesos</li>
+                <li>Suspensión de libranzas</li>
+                <li>No embargos</li>
+                <li>No procesos judiciales</li>
+                <li>No suspensión de servicios públicos domiciliarios</li>
+                <li>Protección del patrimonio</li>
+                <li>Fórmulas de pago que pueden incluir: condonación de intereses, pagos a capital, periodos de gracia.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-justify">
+                <strong>ANEXOS NECESARIOS:</strong> deberá anexar copia de su documento de identidad, certificado de ingresos,
+                certificación de existencia y representación legal de los acreedores en caso de ser entidades expedida por la
+                correspondiente cámara de comercio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12 text-end">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarInsolvencia">Eliminar</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-end">
+              <button type="button" class="btn btn-primary" (click)="printInsolvencia()" data-bs-dismiss="modal">Imprimir</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-end">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="eliminarInsolvencia" tabindex="-1" aria-labelledby="eliminarInsolvenciaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="eliminarInsolvenciaLabel">Eliminar Insolvencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿ Estas seguro que deseas Eliminar esta Insolvencia ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteInsolvencia()">Si</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div class="toast" [class.show]="showToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notificación</strong>
+      <small>Justo ahora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+    <div *ngIf="success" class="toast-body">
+      {{successMessage}}
+    </div>
+    <div *ngIf="error" class="toast-body">
+      {{errorMessage}}
     </div>
   </div>
 </div>

@@ -29,7 +29,8 @@
             <td>{{cliente.email}}</td>
             <td>
               <button class="btn btn-success"  [disabled]="cliente.orientacion" (click)="orientacion(cliente.id)">Orientacion</button>
-              <button class="btn btn-secondary">Contrato</button>
+              <button class="btn btn-warning" [disabled]="!cliente.orientacion"(click)="getCliente(cliente.id)" data-bs-toggle="modal" data-bs-target="#AutorizacionModal">Autorizacion</button>
+              <button class="btn btn-secondary"[disabled]="!cliente.orientacion"(click)="getCliente(cliente.id)" data-bs-toggle="modal" data-bs-target="#ContratonModal">Contrato</button>
               <button class="btn btn-secondary">Poder</button>
               <button class="btn btn-secondary">Recibo</button>
               <button class="btn btn-light">Paz Y Salvo</button>
@@ -64,6 +65,10 @@
                 </div>
               </div>
               <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="ciudadExpedicion" class="col-form-label">Ciudad de expedición:</label>
+                  <input type="text" class="form-control" id="ciudadExpedicion" [(ngModel)]="clienteNew.ciudadExpedicion" name="ciudadExpedicion" required>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -141,6 +146,203 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="AutorizacionModal" tabindex="-1" aria-labelledby="AutorizacionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="AutorizacionModalLabel"> Autorizacion para el tratamiento de datos personales</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-center mb-3">
+                <img src="../../../assets/img/LOGO 1.png" alt="Logo Carolina Diaz Abogados" class="rounded mx-auto d-block" width="200" height="200">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+                <strong>Autorización para el tratamiento y uso de datos personales:</strong> De conformidad con lo previsto en la Ley 1581 de
+                2012 “por la cual se dictan las disposiciones generales para la protección de datos personales” y el Decreto 1377 de
+                2013, que la reglamentan parcialmente, manifiesto que otorgo mi autorización expresa y clara para que la Abogada
+                Yelibeth Carolina Díaz Velásquez, pueda hacer tratamiento y uso de mis datos personales, los cuales estarán
+                reportados en la base de datos de la que es responsable y que han sido recolectados en las relaciones contractuales que
+                ésta realiza en desarrollo de su objeto social.
+              </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+                  De acuerdo a la normatividad citada, la Abogada Yelibeth Carolina Díaz Velásquez queda autorizada de manera
+                  expresa e inequívoca para mantener y manejar la información suministrada, solo para aquellas finalidades para las que
+                  se encuentra facultado y respetando en todo caso, la normatividad vigente sobre protección de datos personales.
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+                  No obstante la presente autorización, me reservo el derecho a ejercer en cualquier momento la posibilidad de conocer,
+                  actualizar, rectificar y solicitar la supresión de mis datos personales en la base de datos de la organización, cuando así
+                  lo estime conveniente.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-5">
+                Atentamente,
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <strong>FIRMA:</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <strong>NOMBRE:</strong> {{cliente.nombres}} {{cliente.apellidos}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <strong>CEDULA:</strong> {{cliente.identificacion}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="autorizacion()">Generar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ContratonModal" tabindex="-1" aria-labelledby="ContratoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ContratoModalLabel"> Contrato de prestacion de serivicios profesionales</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-center mb-3">
+                <img src="../../../assets/img/LOGO 1.png" alt="Logo Carolina Diaz Abogados" class="rounded mx-auto d-block" width="200" height="200">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="text-center mb-3">CONTRATO DE PRESTACION DE SERVICIOS PROFESIONALES</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+                Entre los suscritos a saber la señor/a <strong> {{cliente.nombres | uppercase}} {{cliente.apellidos | uppercase}}</strong>, mayor de edad,
+                con domicilio en la ciudad de <strong>{{cliente.ciudadResidencia | uppercase}} </strong>,
+                identificado con CC No {{cliente.identificacion | number:'1.0-0':'es-CO' }} de {{cliente.ciudadExpedicion | uppercase}}/{{cliente.departamentExpedicion | uppercase}},
+                quien actúa en su propio nombre y representación, quien de ahora en adelante, para los fines del presente contrato,
+                se denominará <strong>CONTRATANTE</strong> de una parte y, <strong>YELIBETH CAROLINA DIAZ VELASQUEZ</strong>,
+                identificada con cédula de ciudadanía número 1.090.446.853 de Cúcuta (N.de.S), domiciliada en Bucaramanga,
+                abogada en ejercicio y portadora de la tarjeta profesional número 251.308 del Consejo Superior Judicatura,
+                quien para efectos del presente contrato se denominará <strong>LA CONTRATADA</strong> de otra parte,
+                se ha celebrado el presente <strong>Contrato de Prestación de Servicios Profesionales de Abogado</strong>,
+                para lo cual se acuerdan las siguiente cláusulas:
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+                <ol>
+                  <li class="mb-2">
+                    <strong>EL CONTRATANTE</strong> manifiesta que es persona natural no comerciante y tiene dificultades para cumplir
+                    con su obligaciones y compromisos financieros, razón por la cual ha solicitado los servicios profesionales
+                    de <strong>LA CONTRATADA</strong> para que le asesore y, en su calidad de profesional del derecho lo represente en el trámite
+                    de negociación de pasivos de conformidad a lo estipulado en el Código General del Proceso, para lo cual
+                    el <strong>CONTRANTANTE</strong> otorgará el correspondiente poder a la <strong>CONTRATADA</strong> para su respectiva representación.
+                  </li>
+                  <li class="mb-2">
+                    El objeto del presente contrato es representar al <strong>CONTRATANTE</strong> en un proceso de negociación de
+                    pasivos para gestionar sus deudas de conformidad a las disposiciones del Artículo 531 del C.G.P. Para esto,
+                    la <strong>CONTRATADA</strong> se obliga a emplear todos los medios profesionales necesarios que le permitan
+                    cumplir con la tarea ajustada a la realidad económica del <strong>CONTRATANTE</strong>.
+                  </li>
+                  <li class="mb-2">
+                    Para el éxito del objeto planteado, <strong>EL CONTRATANTE</strong> se compromete a entregar a la
+                    <strong>CONTRATADA</strong> toda la información indispensable para la elaboración de la solicitud del trámite
+                    de negociación de deudas, así mismo se obliga <strong>AL CONTRATANTE</strong> a realizar las declaraciones
+                    sobre los distintos hechos, los cuales se entienden rendidos bajo la gravedad del juramento, para lo cual indica,
+                    expresamente, que no han incurrido en omisiones, imprecisiones o errores voluntarios que impidan conocer su verdadera
+                    situación económica, su capacidad de pago, sus bienes, sus obligaciones y sus gastos de manutención, en consecuencia,
+                    narra los hechos, recauda y entrega a la <strong>CONTRATADA</strong> todas las pruebas y soportes necesarios que se
+                    requieran para la consecución de los fines enunciados.
+                  </li>
+                  <li>
+                    <strong>EL CONTRATANTE</strong> suministrará todos los gastos que se causen en el desarrollo del proceso,
+                    tales como: gastos del proceso de insolvencia, pago de notificaciones, expensas, copias, costos de vigilancia
+                    del proceso en juzgado por objeciones, controversias, impugnaciones y liquidación patrimonial, así como
+                    las demás diligencias que sean del caso.
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-3">
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-justify mb-5">
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <strong>FIRMA:</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <strong>NOMBRE:</strong> {{cliente.nombres}} {{cliente.apellidos}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-2">
+              <strong>CEDULA:</strong> {{cliente.identificacion}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="autorizacion()">Generar</button>
       </div>
     </div>
   </div>

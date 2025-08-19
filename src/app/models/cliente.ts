@@ -2,6 +2,9 @@ export class Cliente {
   constructor(
     public id: number | null,
     public identificacion: string,
+    public ciudadExpedicion: string,
+    public ciudadResidencia: string,
+    public departamentExpedicion: string,
     public nombres: string,
     public apellidos: string,
     public email: string,

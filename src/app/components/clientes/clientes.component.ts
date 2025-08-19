@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import html2pdf from 'html2pdf.js';
 
 @Component({
     selector: 'app-clientes',
@@ -12,8 +13,8 @@ import { ClienteService } from 'src/app/services/cliente.service';
 export class ClientesComponent implements OnInit {
 
   public clientes: Cliente[] = [];
-  public cliente: Cliente = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
-  public clienteNew: Cliente = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
+  public cliente: Cliente = new Cliente(null, "","","","","", "", "", "", "", "", false,false, 0, 0);
+  public clienteNew: Cliente = new Cliente(null, "","","","","", "", "", "", "", "", false,false, 0, 0);
   public showToast = false;
   public success = false;
   public error = false;
@@ -52,7 +53,7 @@ export class ClientesComponent implements OnInit {
         this.showToast = false;
         this.success = false;
       }, 3000);
-      this.clienteNew = new Cliente(null, "", "", "", "", "", "", "", false, false, 0, 0);
+      this.clienteNew = new Cliente(null, "","","","","", "", "", "", "", "", false, false, 0, 0);
       this.getAllClientes();
     },
     error => {
@@ -64,9 +65,22 @@ export class ClientesComponent implements OnInit {
         this.showToast = false;
         this.error = false;
       }, 3000);
-      this.clienteNew = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
+      this.clienteNew = new Cliente(null, "","","","", "", "", "", "", "", "", false,false, 0, 0);
     });
   }
+
+  autorizacion(){
+      const element = document.querySelector('#AutorizacionModal .modal-body');
+      if (element) {
+        html2pdf().set({
+          margin: 10,
+          filename: 'Autorizacion-insolvencia.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
+        }).from(element as HTMLElement).save();
+      }
+    }
 
   hideToast() {
     this.showToast = false;

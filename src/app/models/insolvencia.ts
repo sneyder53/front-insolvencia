@@ -12,9 +12,9 @@ export class Insolvencia {
     public estado: string,
     public insolvenciaProductos: InsolvenciaProducto[],
     public totalProductos: number,
-    public cliente : Cliente,
+    public cliente : Cliente | null,
     public causas : Causa[],
-    public gastosManutencion : GastosManutencion,
+    public gastosManutencion : GastosManutencion | null,
     public totalGastosManutencion : number,
     public bienesMuebles : BienesMueble[],
     public totalMuebles : number,
@@ -22,6 +22,8 @@ export class Insolvencia {
     public totalInmuebles : number,
     public judicial: Judicial[],
     public varloCuotaMensual: number,
+    public primeraCuota: number,
+    public honorarios: number,
     public tiempo: number,
   ) {}
 }

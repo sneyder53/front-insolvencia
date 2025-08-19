@@ -24,7 +24,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class OrientacionComponent implements OnInit {
   id: number | null = null;
-  cliente: Cliente = new Cliente(null, "", "", "", "", "", "", "", false,false, 0, 0);
+  cliente: Cliente = new Cliente(null, "","","","","", "", "", "", "", "", false,false, 0, 0);
   causas: Causa[] = [];
   causasInsolvencia: Causa[] = [];
   acreedores: Acreedor[] = [];
@@ -52,7 +52,7 @@ export class OrientacionComponent implements OnInit {
     diasMora: 0
   };
 
-  insolvencia: Insolvencia = new Insolvencia(null, "",this.productosInsolvencia,0, this.cliente, this.causasInsolvencia, this.gastos, 0, this.muebles, 0, this.inmuebles, 0, this.judiciales, 0, 0);
+  insolvencia: Insolvencia = new Insolvencia(null, "",this.productosInsolvencia,0, this.cliente, this.causasInsolvencia, this.gastos, 0, this.muebles, 0, this.inmuebles, 0, this.judiciales, 0, 0,0,0);
 
   constructor(private _route: ActivatedRoute,
     private _router: Router,
