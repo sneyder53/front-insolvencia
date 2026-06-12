@@ -66,8 +66,22 @@
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
+                  <label for="ciudadResidencia" class="col-form-label">Ciudad de residencia:</label>
+                  <input type="text" class="form-control" id="ciudadResidencia" [(ngModel)]="clienteNew.ciudadResidencia" name="ciudadResidencia" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
                   <label for="ciudadExpedicion" class="col-form-label">Ciudad de expedición:</label>
                   <input type="text" class="form-control" id="ciudadExpedicion" [(ngModel)]="clienteNew.ciudadExpedicion" name="ciudadExpedicion" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="departamentExpedicion" class="col-form-label">Departamento de expedición:</label>
+                  <input type="text" class="form-control" id="departamentExpedicion" [(ngModel)]="clienteNew.departamentExpedicion" name="departamentExpedicion" required>
                 </div>
               </div>
             </div>

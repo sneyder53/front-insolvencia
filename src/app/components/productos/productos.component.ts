@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Acreedor } from 'src/app/models/acreedor';
+import { CategoriaProducto } from 'src/app/models/categoria-producto.enum';
 import { Producto } from 'src/app/models/producto';
 import { ProductoInterface } from 'src/app/models/producto-interface';
 import { AcreedorService } from 'src/app/services/acreedor.service';
@@ -15,18 +16,20 @@ export class ProductosComponent {
 
     public productos: Producto[] = [];
     public acreedores: Acreedor[] = [];
-    public productoNew: ProductoInterface = {id: null, nombre: '', acreedor: {id: 0 , nombre: ''}};
-    public productoUpdate: ProductoInterface = {id: null, nombre: '', acreedor: {id: 0 , nombre: ''}};
+    public productoNew: ProductoInterface = {id: null, nombre: '', categoria: null, acreedor: {id: 0 , nombre: ''}};
+    public productoUpdate: ProductoInterface = {id: null, nombre: '', categoria: null, acreedor: {id: 0 , nombre: ''}};
     public showToast = false;
     public success = false;
     public error = false;
     public successMessage: string = "";
     public errorMessage: string = "";
+    public categorias: CategoriaProducto[] = [];
     constructor(private _productoService:ProductoService, private _acreedorService: AcreedorService) { }
 
     ngOnInit(): void {
       this.getAllProductos();
       this.getAllAcreedores();
+      this.getCategorias();
     }
 
     getAllProductos(): void {
@@ -50,7 +53,16 @@ export class ProductosComponent {
           this.productoUpdate.id = response.id;
           this.productoUpdate.nombre = response.nombre;
           this.productoUpdate.acreedor.id = response.acreedor.id;
+          this.productoUpdate.categoria = response.categoria;
 
+        }
+      );
+    }
+
+    getCategorias(): void {
+      this._productoService.getcategorias().subscribe(
+        (response) => {
+          this.categorias = response;
         }
       );
     }
@@ -66,7 +78,7 @@ export class ProductosComponent {
             this.success = false;
           }, 3000);
           this.getAllProductos()
-          this.productoNew = {id: null, nombre: '', acreedor: {id: 0 , nombre: ''}};
+          this.productoNew = {id: null, nombre: '', categoria: '' as CategoriaProducto, acreedor: {id: 0 , nombre: ''}};
         },
         (error) => {
           this.showToast = true;
@@ -81,6 +93,9 @@ export class ProductosComponent {
     }
 
     actualizarProducto(): void {
+
+      console.log('Categoria seleccionada:', this.productoUpdate.categoria);
+      console.log(this.productoUpdate);
       this._productoService.updateProducto(this.productoUpdate).subscribe(
         (response) => {
           this.showToast = true;
@@ -91,7 +106,7 @@ export class ProductosComponent {
             this.success = false;
           }, 3000);
           this.getAllProductos()
-          this.productoUpdate = {id: null, nombre: '', acreedor: {id: 0 , nombre: ''}};
+          this.productoUpdate = {id: null, nombre: '', categoria: '' as CategoriaProducto, acreedor: {id: 0 , nombre: ''}};
         },
         (error) => {
           this.showToast = true;
@@ -116,7 +131,7 @@ export class ProductosComponent {
             this.success = false;
           }, 3000);
           this.getAllProductos()
-          this.productoUpdate = {id: null, nombre: '', acreedor: {id: 0 , nombre: ''}};
+          this.productoUpdate = {id: null, nombre: '', categoria: null, acreedor: {id: 0 , nombre: ''}};
         },
         (error) => {
           this.showToast = true;

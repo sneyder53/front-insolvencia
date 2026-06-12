@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import { Producto } from '../models/producto';
 import { ProductoInterface } from '../models/producto-interface';
+import { CategoriaProducto } from '../models/categoria-producto.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class ProductoService {
 
   getProducto(id: number | null): Observable<Producto> {
     return this._http.get<Producto>(`${this.apiUrl}/${id}`);
+  }
+
+  getcategorias(): Observable<CategoriaProducto[]> {
+    return this._http.get<CategoriaProducto[]>(`${this.apiUrl}/categorias`);
   }
 
   crearProducto(producto: ProductoInterface): Observable<Producto> {

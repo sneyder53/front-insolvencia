@@ -9,13 +9,15 @@ import html2pdf from 'html2pdf.js';
     styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  insolvencias : Insolvencia [] = [];
+  public insolvencias : Insolvencia [] = [];
   public insolvenciaUpdate: Insolvencia = new Insolvencia(null, "", [], 0, null, [], null, 0, [], 0, [], 0, [], 0, 0, 0, 0);
   public showToast = false;
   public success = false;
   public error = false;
   public successMessage: string = "";
   public errorMessage: string = "";
+  public insolvenciasFiltradas: Insolvencia[] = [];
+  public terminoBusqueda: string = '';
 
   constructor(private _insolvenciaService : InsolvenciaService){}
   ngOnInit(): void {
@@ -26,9 +28,33 @@ export class HomeComponent implements OnInit {
     this._insolvenciaService.getAllInsolvencias().subscribe(
       response => {
         this.insolvencias = response;
+        this.insolvenciasFiltradas = response;
+      },
+      error => {
+        console.log(error);
+        this.insolvenciasFiltradas = [];
       }
     );
   }
+
+  buscarInsolvencias() {
+
+    const termino = this.terminoBusqueda.toLowerCase().trim();
+
+    if (!termino) {
+      this.insolvenciasFiltradas = this.insolvencias;
+      return;
+    }
+
+    this.insolvenciasFiltradas = this.insolvencias.filter(insolvencia =>
+      insolvencia.cliente?.nombres?.toLowerCase().includes(termino) ||
+      insolvencia.cliente?.apellidos?.toLowerCase().includes(termino) ||
+      insolvencia.cliente?.email?.toLowerCase().includes(termino) ||
+      insolvencia.cliente?.telefono?.toLowerCase().includes(termino) ||
+      insolvencia.estado?.toLowerCase().includes(termino)
+    );
+  }
+
 
   getInsolvenciaById(id: number) {
     this._insolvenciaService.getInsolvencia(id).subscribe(

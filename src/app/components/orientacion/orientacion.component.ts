@@ -43,6 +43,7 @@ export class OrientacionComponent implements OnInit {
     productoId: {
       id: null,
       nombre: '',
+      categoria: '' as any,
       acreedor: {
         id: null,
         nombre: ''
@@ -159,6 +160,7 @@ export class OrientacionComponent implements OnInit {
       productoId: {
         id: null,
         nombre: '',
+        categoria: '' as any,
         acreedor: {
           id: null,
           nombre: ''

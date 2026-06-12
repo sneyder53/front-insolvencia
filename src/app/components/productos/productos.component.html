@@ -16,6 +16,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Acreedor</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Nombre</th>
             <th scope="col">Accion</th>
           </tr>
@@ -24,6 +25,7 @@
           <tr *ngFor="let producto of productos">
             <td>{{producto.id}}</td>
             <td>{{producto.acreedor.nombre}}</td>
+            <td>{{producto.categoria}}</td>
             <td>{{producto.nombre}}</td>
             <td>
               <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#updateProductoModal" (click)="producto.id !== null ? getProducto(producto.id) : null">
@@ -62,6 +64,17 @@
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
+                  <label for="categoria" class="col-form-label">Categoria:</label>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="productoNew.categoria" name="categoria" required>
+                    <option selected></option>
+                    <option *ngFor="let categoria of categorias" value="{{categoria}}">{{categoria}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
                   <input type="text" class="form-control" id="nombre" [(ngModel)]="productoNew.nombre" name="nombre" required>
                 </div>
@@ -98,6 +111,17 @@
                   </select>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="categoria" class="col-form-label">Categoria:</label>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="productoUpdate.categoria" name="categoria" required>
+                    <option selected></option>
+                    <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="nombre" class="col-form-label">Nombre:</label>
