@@ -5,5 +5,6 @@ export class BienesMueble {
     public numero: string,
     public valor: number,
     public afectacion: boolean,
+    public observacion: string | null
   ) {}
 }

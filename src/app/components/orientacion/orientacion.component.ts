@@ -32,10 +32,10 @@ export class OrientacionComponent implements OnInit {
   productos: Producto[] = [];
   gastos: GastosManutencion = new GastosManutencion(null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   muebles: BienesMueble[] = [];
-  mueble: BienesMueble = new BienesMueble(null, "", "", 0, false);
+  mueble: BienesMueble = new BienesMueble(null, "", "", 0, false, null);
   inmuebles: BienesInmueble[] = [];
-  inmueble: BienesInmueble = new BienesInmueble(null, "", "", "", 0, "");
-  judicial: Judicial = new Judicial(null, "", "", "", "");
+  inmueble: BienesInmueble = new BienesInmueble(null, "", "", "", 0, "", null);
+  judicial: Judicial = new Judicial(null, "", "", "", "", null);
   judiciales: Judicial[] = [];
   insolvenciaProducto: InsolvenciaProducto = {
     id: null,
@@ -149,6 +149,8 @@ export class OrientacionComponent implements OnInit {
       if (producto.id == this.insolvenciaProducto.productoId.id) {
         this.insolvenciaProducto.productoId.id = producto.id;
         this.insolvenciaProducto.productoId.nombre = producto.nombre;
+        this.insolvenciaProducto.productoId.categoria = producto.categoria;
+        this.insolvenciaProducto.productoId.acreedor = producto.acreedor;
       }
     });
     this.productosInsolvencia.push(this.insolvenciaProducto);
@@ -174,18 +176,18 @@ export class OrientacionComponent implements OnInit {
   agregarMueble() {
     this.muebles.push(this.mueble);
     this.insolvencia.totalMuebles += Number(this.mueble.valor);
-    this.mueble = new BienesMueble(null, "", "", 0, false);
+    this.mueble = new BienesMueble(null, "", "", 0, false, null);
   }
 
   agregarInmueble() {
     this.inmuebles.push(this.inmueble);
     this.insolvencia.totalInmuebles += Number(this.inmueble.valor);
-    this.inmueble = new BienesInmueble(null, "", "", "", 0, "");
+    this.inmueble = new BienesInmueble(null, "", "", "", 0, "", null);
   }
 
   agregarJudicial() {
     this.judiciales.push(this.judicial);
-    this.judicial = new Judicial(null, "", "", "", "");
+    this.judicial = new Judicial(null, "", "", "", "", null);
   }
 
   listProductosByAcreedor(id: number | null) {

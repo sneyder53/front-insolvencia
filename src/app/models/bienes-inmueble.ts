@@ -6,6 +6,7 @@ export class BienesInmueble {
     public matricula : string,
     public valor: number,
     public afectacion: string,
+    public observacion: string | null
   ) {}
 }
 

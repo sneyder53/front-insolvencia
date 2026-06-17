@@ -465,7 +465,7 @@
             ANEXOS NECESARIOS: deberá anexar copia de su documento de identidad,
             certificado de ingresos, certificación de existencia y
             representación legal de los acreedores en caso de ser entidades
-            expedida por la correspondiente cámara de comercio.
+            expedida por la correspondiente cámara de comercio u otros documentos que sean necesarios para el tramite del proceso.
           </p>
         </div>
         <div class="col"></div>
@@ -530,14 +530,14 @@
                 <div class="mb-3">
                   <label for="valorDeuda" class="col-form-label">Valor Deuda:</label>
                   <input type="text" class="form-control" id="valorDeuda" [(ngModel)]="insolvenciaProducto.valorDeuda"
-                    name="valorDeuda" required />
+                    name="valorDeuda" required pattern="^[0-9]+([.,][0-9]+)?$" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="diasMora" class="col-form-label">Dias de Mora:</label>
                   <input type="text" class="form-control" id="diasMora" [(ngModel)]="insolvenciaProducto.diasMora"
-                    name="diasMora" required />
+                    name="diasMora" required pattern="^[0-9]+$" />
                 </div>
               </div>
             </div>
@@ -593,7 +593,7 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="valor" class="col-form-label">Valor Bien:</label>
-                  <input type="text" class="form-control" id="valor" [(ngModel)]="mueble.valor" name="valor" required />
+                  <input type="text" class="form-control" id="valor" [(ngModel)]="mueble.valor" name="valor" required pattern="^[0-9]+([.,][0-9]+)?$" />
                 </div>
               </div>
               <div class="col-md-6">
@@ -603,6 +603,14 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="afectacion"
                       [(ngModel)]="mueble.afectacion" name="afectacion" />
                   </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <label for="observacion" class="col-form-label">Observacion:</label>
+                  <textarea class="form-control" id="observacion" [(ngModel)]="mueble.observacion" name="observacion"></textarea>
                 </div>
               </div>
             </div>
@@ -668,7 +676,7 @@
                 <div class="mb-3">
                   <label for="valor" class="col-form-label">Valor Bien:</label>
                   <input type="text" class="form-control" id="valor" [(ngModel)]="inmueble.valor" name="valor"
-                    required />
+                    required pattern="^[0-9]+([.,][0-9]+)?$" />
                 </div>
               </div>
               <div class="col-md-6">
@@ -685,6 +693,13 @@
                       Afectacion a la vivienda
                     </option>
                   </select>
+                </div>
+              </div>
+            </div><div class="row">
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <label for="observacion" class="col-form-label">Observacion:</label>
+                  <textarea class="form-control" id="observacion" [(ngModel)]="inmueble.observacion" name="observacion"></textarea>
                 </div>
               </div>
             </div>
@@ -746,6 +761,14 @@
                   <label for="tipoProceso" class="col-form-label">Tipo Proceso:</label>
                   <input type="text" class="form-control" id="tipoProceso" [(ngModel)]="judicial.tipoProceso"
                     name="tipoProceso" required />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <label for="estadoProceso" class="col-form-label">Estado del Proceso:</label>
+                  <input type="text" class="form-control" id="estadoProceso" [(ngModel)]="judicial.estadoProceso" name="estadoProceso" required/>
                 </div>
               </div>
             </div>

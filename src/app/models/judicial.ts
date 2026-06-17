@@ -5,5 +5,6 @@ export class Judicial {
     public radicado: string,
     public demandante: string,
     public tipoProceso: string,
+    public estadoProceso: string | null,
   ) {}
 }
